@@ -31,7 +31,7 @@ class App extends Component {
 
         <div className="Hand">
           <div className="Hand__CardList">
-            <Card element="fire" rank={2} />
+            <Card element="fire" isTrump rank={2} />
             <Card element="magic" rank={0} />
             <Card element="magic" rank={1} />
           </div>

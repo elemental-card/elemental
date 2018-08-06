@@ -77,6 +77,10 @@
   box-shadow: 0 0 10vh 1vh gold;
 }
 
+.Card--trump {
+  box-shadow: 0 0 10vh 1vh #8888ff;
+}
+
 .Card--magic.Card--winning {
   background-color: black;
   --blur: 3vh;
