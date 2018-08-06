@@ -1,0 +1,42 @@
+.Table {
+  background-color: #222222;
+  height: 50vh;
+}
+
+.Hand {
+  background-color: black;
+  height: 50vh;
+}
+
+.Card {
+  display: inline-block;
+  color: white;
+  width: 30vh;
+  height: 42vh;
+  border-radius: 3vh;
+  text-align: center;
+  line-height: 42vh;
+  font-size: 24vh;
+  margin: 4vh 2vh 4vh 2vh;
+}
+
+.Card--fire {
+  background-color: orange;
+}
+
+.Card--water {
+  background-color: #08b;
+}
+
+.Card--earth {
+  background-color: #663300;
+}
+
+.Card--air {
+  background-color: white;
+  color: #444444;
+}
+
+.Card--magic {
+  background-color: purple;
+}
