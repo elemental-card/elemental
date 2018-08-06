@@ -3,6 +3,7 @@
 const gameState = choosingTrump || bidding || choosingCard;
 
 const choosingTrump = {
+  prngState: Int32Array,
   players: [
     {
       name: 'string',
@@ -13,6 +14,7 @@ const choosingTrump = {
 };
 
 const bidding = {
+  prngState: Int32Array,
   trump: 'trump',
   players: [
     {
@@ -25,6 +27,7 @@ const bidding = {
 };
 
 const choosingCard = {
+  prngState: Int32Array,
   trump: 'trump',
   nextDealer: 'string',
   players: [
@@ -71,17 +74,17 @@ const nextState = (currState, action) => {
 const serialize = (state) => {
   let str = '';
   if (state instanceof choosingTrump) {
-    str += 'choosingTrump;';
+    str += 'choosingTrump,[' + prngState.join(',') + '];';
     for (const p of players) {
       str += p.name + ',' + p.score + ',[' + p.hand.join(',') + '];';
     }
   } else if (state instanceof bidding) {
-    str += 'bidding,' + trump + ';';
+    str += 'bidding,' + trump + ';'; // TODO handle prngState
     for (const p of players) {
       str += p.name + ',' + p.score + ',[' + p.hand.join(',') + '],' + bid + ';';
     }
   } else if (state instanceof choosingCard) {
-    str += 'choosingCard,' + trump + ',' + nextDealer + ';';
+    str += 'choosingCard,' + trump + ',' + nextDealer + ';'; // TODO handle prngState
     for (const p of players) {
       str += p.name + ',' + p.score + ',[' + p.hand.join(',') + '],' + bid + ',' + tricksWon + ',' + playedCard + ';';
     }
