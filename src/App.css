@@ -8,16 +8,34 @@
   height: 50vh;
 }
 
+.PlayerLabel {
+  display: inline-block;
+  width: 30vh;
+  text-align: center;
+  margin: 0 2vh 0 2vh;
+  font-size: 6vh;
+  color: #ddd;
+}
+
 .Card {
   display: inline-block;
   color: white;
   width: 30vh;
-  height: 42vh;
-  border-radius: 3vh;
+  height: 30vh;
+  border-radius: 30vh;
   text-align: center;
-  line-height: 42vh;
+  line-height: 30vh;
   font-size: 24vh;
-  margin: 4vh 2vh 4vh 2vh;
+  margin: 0 2vh 0 2vh;
+}
+
+.Table__NameList,
+.Table__TrickList {
+  padding: 2vh 0vh .5vh 0vh;
+}
+
+.Hand__CardList {
+  padding: 10vh 0 10vh 0;
 }
 
 .Card--fire {
@@ -40,4 +58,5 @@
 
 .Card--magic {
   background-color: purple;
+  box-shadow: 0 0 10vh 1vh magenta;
 }
