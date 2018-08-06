@@ -1,10 +1,10 @@
 .Table {
-  background-color: #222222;
+  background-color: #444444;
   height: 50vh;
 }
 
 .Hand {
-  background-color: black;
+  background-color: #222222;
   height: 50vh;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .Card--fire {
-  background-color: orange;
+  background-color: darkorange;
 }
 
 .Card--water {
@@ -29,7 +29,8 @@
 }
 
 .Card--earth {
-  background-color: #663300;
+  background-color: black;
+  color: #eee;
 }
 
 .Card--air {
