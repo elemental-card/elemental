@@ -15,6 +15,7 @@
   margin: 0 2vh 0 2vh;
   font-size: 6vh;
   color: #ddd;
+  position: relative;
 }
 
 .Card {
@@ -36,6 +37,18 @@
 
 .Hand__CardList {
   padding: 10vh 0 10vh 0;
+}
+
+.WinningPlayerIndicator {
+  width: 2vh;
+  height: 2vh;
+  border-radius: 2vh;
+  background-color: green;
+  display: inline-block;
+  margin: 0 1vh 1vh 0;
+  position: absolute;
+  top: 2.5vh;
+  left: 5vh;
 }
 
 .Card--fire {
@@ -71,10 +84,6 @@
     inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
     inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
     inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
-}
-
-.Card--winning {
-  box-shadow: 0 0 10vh 1vh gold;
 }
 
 .Card--trump {

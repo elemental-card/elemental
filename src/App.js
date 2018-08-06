@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PlayerLabel from './PlayerLabel';
+import WinningPlayerIndicator from './WinningPlayerIndicator';
 import Card from './Card';
 import './App.css';
 
@@ -9,14 +10,14 @@ class App extends Component {
       <div className="App">
         <div className="Table">
           <div className="Table__NameList">
-            <PlayerLabel>JCL</PlayerLabel>
+            <PlayerLabel><WinningPlayerIndicator />JCL</PlayerLabel>
             <PlayerLabel>MXW</PlayerLabel>
             <PlayerLabel>JXL</PlayerLabel>
             <PlayerLabel>KJL</PlayerLabel>
           </div>
 
           <div className="Table__CardList">
-            <Card element="earth" rank={2} isWinning />
+            <Card element="earth" rank={13} />
             <Card element="water" rank={3} />
             <Card element="air" rank={2} />
           </div>
