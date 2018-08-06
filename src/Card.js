@@ -1,7 +1,10 @@
 import React from 'react';
 
-const getClassName = (element) => {
-  return 'Card Card--' + element;
+const getClassName = (element, isWinning) => {
+  return 'Card Card--' + element + (isWinning
+    ? ' Card--winning'
+    : ''
+  );
 };
 
 const formatRank = (rank) => {
@@ -11,9 +14,9 @@ const formatRank = (rank) => {
   return rank;
 };
 
-const Card = ({ rank, element }) => {
+const Card = ({ rank, element, isWinning }) => {
   return (
-    <div className={getClassName(element)}>
+    <div className={getClassName(element, isWinning)}>
       <div className="Card__Rank">{formatRank(rank)}</div>
     </div>
   );

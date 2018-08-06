@@ -57,6 +57,24 @@
 }
 
 .Card--magic {
-  background-color: purple;
-  box-shadow: 0 0 10vh 1vh magenta;
+  background-color: magenta;
+  //background-color: #808080;
+  //box-shadow: 0 0 10vh 1vh magenta;
+  --blur: 3vh;
+  --spread: -2vh;
+  --inblur: 10vh;
+  --inspread: -2vh;
+  --inoffset: 4vh;
+  box-shadow: -2vh -2vh var(--blur) var(--spread) darkorange,
+    2vh -2vh var(--blur) var(--spread) #08b,
+    2vh 2vh var(--blur) var(--spread) white,
+    -2vh 2vh var(--blur) var(--spread) black,
+    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread) darkorange,
+    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
+    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
+    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
+}
+
+.Card--winning {
+  box-shadow: 0 0 10vh 1vh gold;
 }
