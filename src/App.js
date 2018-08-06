@@ -16,7 +16,7 @@ class App extends Component {
           </div>
 
           <div className="Table__CardList">
-            <Card element="magic" rank={1} isWinning />
+            <Card element="earth" rank={2} isWinning />
             <Card element="water" rank={3} />
             <Card element="air" rank={2} />
           </div>

@@ -74,6 +74,10 @@
 }
 
 .Card--winning {
+  box-shadow: 0 0 10vh 1vh gold;
+}
+
+.Card--magic.Card--winning {
   background-color: black;
   --blur: 3vh;
   --spread: -2vh;
