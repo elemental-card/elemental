@@ -1,4 +1,5 @@
 import { getWinnerIndex, generateOrderedDeck } from './cardUtils';
+import getElementOfTrump from './getElementOfTrump';
 import xorshift from 'xorshift';
 
 const Xorshift = xorshift.constructor;
@@ -330,19 +331,6 @@ const setStateTypeToChoosingTrump = (currState) => {
     ...currState,
     type: 'CHOOSING_TRUMP',
   };
-};
-
-const getElementOfTrump = (trump) => {
-  if (trump.type === 'noTrump') {
-    return null;
-  }
-  if (trump.type === 'card') {
-    return trump.value.element;
-  }
-  if (trump.type === 'dealerChoice') {
-    return trump.value;
-  }
-  throw new Error('Illegal trump enum.');
 };
 
 export default nextGameState;

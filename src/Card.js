@@ -8,15 +8,15 @@ const getClassName = (element, isTrump) => {
 };
 
 const formatRank = (rank) => {
-  if (rank === 1) {
+  if (rank === Infinity) {
     return '∞';
   }
   return rank;
 };
 
-const Card = ({ rank, element, isTrump }) => {
+const Card = ({ rank, element, isTrump, onClick }) => {
   return (
-    <div className={getClassName(element, isTrump)}>
+    <div className={getClassName(element, isTrump)} onClick={onClick}>
       <div className="Card__Rank">{formatRank(rank)}</div>
     </div>
   );

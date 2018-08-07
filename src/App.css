@@ -1,4 +1,4 @@
-.Table {
+.CardTable {
   background-color: #444444;
   height: 50vh;
 }
@@ -30,8 +30,8 @@
   margin: 0 2vh 0 2vh;
 }
 
-.Table__NameList,
-.Table__TrickList {
+.CardTable__NameList,
+.CardTable__TrickList {
   padding: 2vh 0vh .5vh 0vh;
 }
 
@@ -106,4 +106,46 @@
     inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
     inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black,
     0 0 10vh 1vh gold;
+}
+
+.Card--confirmation {
+  background-color: green;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  from {
+    box-shadow: none;
+  }
+
+  to {
+    box-shadow: 0 0 10vh 1vh green;
+  }
+}
+
+.CheckIcon {
+  display: inline-block;
+  position: relative;
+  transform: translate(-5vh, -10vh) rotate(45deg);
+}
+
+.CheckIcon::before {
+    content: "";
+    position: absolute;
+    width:3vh;
+    height:15vh;
+    background-color:#ccc;
+    top: -12vh;
+    left: 5vh;
+}
+
+.CheckIcon::after {
+    content: "";
+    position: absolute;
+    width: 5vh;
+    height: 3vh;
+    background-color:#ccc;
 }
