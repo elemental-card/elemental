@@ -110,10 +110,7 @@
 
 .Card--confirmation {
   background-color: green;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation: 0.5s infinite alternate blink;
 }
 
 @keyframes blink {
