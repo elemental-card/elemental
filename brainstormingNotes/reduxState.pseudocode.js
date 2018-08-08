@@ -11,8 +11,8 @@ const reduxState = home
   || bidding
   || waitingForPlayersToBid
   || lookingAtLastBid
-  || choosingCard
-  || waitingForCardToBeChosen
+  || choosingCard // DONE-ISH TODO prevent revokes
+  || waitingForCardToBeChosen // DONE
   || lookingAtLastCardOfTrick
   || lookingAtScoreChanges
   || lookingAtFinalScores;

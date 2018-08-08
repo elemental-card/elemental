@@ -1,25 +1,20 @@
 import React from 'react';
-import getElementOfTrump from './gameLogic/getElementOfTrump';
-import { getWinnerIndex } from './gameLogic/cardUtils';
+import getElementOfTrump from '../gameLogic/getElementOfTrump';
+import { getWinnerIndex } from '../gameLogic/cardUtils';
 
 import PlayerLabel from './PlayerLabel';
 import WinningPlayerIndicator from './WinningPlayerIndicator';
 import Card from './Card';
 import ConfirmationCard from './ConfirmationCard';
 
-const CardChoosingScreen = ({
+const LookingAtLastCardOfTrickScreen = ({
   ownName,
-  gameState,
-  tentativeCard,
+  viewedGameState: gameState,
 
-  selectTentativeCard,
-  confirmTentativeCard,
+  continueToNextScreen,
 }) => {
   const trumpElement = getElementOfTrump(gameState.trump);
   const ownHand = gameState.players.find(p => p.name === ownName).hand;
-  const tentativeCardIndex = tentativeCard === null
-    ? -1
-    : ownHand.findIndex(c => c.rank === tentativeCard.rank && c.element === tentativeCard.element);
   const currentWinnerName = gameState.players[
     getWinnerIndex(gameState.players.filter(p => p.playedCard !== null).map(p => p.playedCard), trumpElement)
   ].name;
@@ -39,13 +34,12 @@ const CardChoosingScreen = ({
               <PlayerLabel>{name}</PlayerLabel>
             );
           })}
+          <PlayerLabel>{currentWinnerName} Wins!</PlayerLabel>
         </div>
 
         <div className="CardTable__CardList">
           {gameState.players.map((player) => {
-            const card = player.name === ownName
-              ? tentativeCard
-              : player.playedCard;
+            const card = player.playedCard;
             if (card === null) {
               return null;
             }
@@ -53,6 +47,8 @@ const CardChoosingScreen = ({
               <Card element={card.element} rank={card.rank} isTrump={card.element === trumpElement} />
             );
           })}
+
+          <ConfirmationCard onClick={continueToNextScreen} />
         </div>
 
         <div className="CardTable__TrickList">
@@ -62,19 +58,16 @@ const CardChoosingScreen = ({
               <PlayerLabel>{tricksWon}/{bid}</PlayerLabel>
             );
           })}
+
+          <PlayerLabel>Continue</PlayerLabel>
         </div>
       </div>
 
       <div className="Hand">
         <div className="Hand__CardList">
           {ownHand.map((card, i) => {
-            if (i === tentativeCardIndex) {
-              return (
-                <ConfirmationCard onClick={confirmTentativeCard} />
-              );
-            }
             return (
-              <Card element={card.element} rank={card.rank} isTrump={card.element === trumpElement} onClick={() => selectTentativeCard(card)} />
+              <Card element={card.element} rank={card.rank} isTrump={card.element === trumpElement} />
             );
           })}
         </div>
@@ -83,4 +76,4 @@ const CardChoosingScreen = ({
   );
 };
 
-export default CardChoosingScreen;
+export default LookingAtLastCardOfTrickScreen;

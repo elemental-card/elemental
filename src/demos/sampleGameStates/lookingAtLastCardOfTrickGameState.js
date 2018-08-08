@@ -1,4 +1,4 @@
-export const choosingCardGameState = {
+const lookingAtLastCardOfTrickGameState = {
   prngState: [1, 2, 3, 4],
   trump: {
     type: 'card',
@@ -74,10 +74,6 @@ export const choosingCardGameState = {
       score: 20,
       hand: [
         {
-          rank: 2,
-          element: 'fire',
-        },
-        {
           rank: 0,
           element: 'magic',
         },
@@ -88,7 +84,12 @@ export const choosingCardGameState = {
       ],
       bid: 1,
       tricksWon: 0,
-      playedCard: null,
+      playedCard: {
+        rank: 2,
+        element: 'fire',
+      },
     },
   ],
 };
+
+export default lookingAtLastCardOfTrickGameState;
