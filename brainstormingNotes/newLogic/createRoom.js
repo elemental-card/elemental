@@ -1,13 +1,13 @@
 export default async (hostUid, hostName) => {
-  const doc = db.collection('rooms').doc(hostUid);
+  const roomRef = db.collection('rooms').doc(hostUid);
   try {
-    await doc.set({
+    await roomRef.set({
       hostName,
       actions: [],
     });
   } catch (unused) {
-    await doc.delete();
-    await doc.set({
+    await roomRef.delete();
+    await roomRef.set({
       hostName,
       actions: [],
     });
