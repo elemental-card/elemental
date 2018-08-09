@@ -2,7 +2,9 @@ import getNextGameState from './getNextGameState';
 import getCardFromCardCode from './getCardFromCardCode';
 import getActivePlayerName from './getActivePlayerName';
 
-export default (hostUid, { actions, hostName }) => {
+export default (roomDoc) => {
+  const hostUid = roomDoc.id;
+  const { actions, hostName } = roomDoc.data();
   return actions.reduce((roomState, action) => {
     if (
       roomState.type === 'PREGAME'
