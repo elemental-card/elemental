@@ -1,6 +1,7 @@
 import getNextGameState from './getNextGameState';
 import getCardFromCardCode from './getCardFromCardCode';
 import getActivePlayerName from './getActivePlayerName';
+import getInitGameState from './getInitGameState';
 
 export default (roomDoc) => {
   const hostUid = roomDoc.id;
@@ -44,7 +45,10 @@ export default (roomDoc) => {
       return {
         type: 'GAME',
         players: roomState.players,
-        gameState: TODO,
+        gameState: getInitGameState(
+          action.prngState,
+          roomState.players.map(p => p.name)
+        ),
       };
     }
 

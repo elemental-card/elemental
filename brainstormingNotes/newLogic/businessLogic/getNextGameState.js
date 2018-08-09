@@ -1,8 +1,6 @@
-import { getWinnerIndex, generateOrderedDeck } from './cardUtils';
+import { getWinnerIndex, getOrderedDeck } from './cardUtils';
 import getElementOfTrump from './getElementOfTrump';
-import xorshift from 'xorshift';
-
-const Xorshift = xorshift.constructor;
+import getShuffledArrayAndNewPrngState from './getShuffledArrayAndNewPrngState';
 
 export default (currState, choice) => {
   if (currState.type === 'CHOOSING_TRUMP') {
@@ -29,7 +27,13 @@ export default (currState, choice) => {
     if (doPlayersHaveCardsLeftToPlay) {
       return currState;
     }
-    const { deck, nextPrngState } = generateDeckAndGetNextPrngState(currState.prngState);
+    const {
+      shuffledArray: deck,
+      newPrngState,
+    } = getShuffledArrayAndNewPrngState({
+      array: getOrderedDeck(),
+      prngState: currState.prngState,
+    });
     const roundNumber = currState.players.map(p => p.tricksWon).reduce((a, b) => a + b);
     const finalRoundNumber = 60 / numberOfPlayers;
     if (roundNumber === finalRoundNumber) {
@@ -43,7 +47,7 @@ export default (currState, choice) => {
       : deck[numberOfCardsToBeDealtNextRound];
     currState = {
       ...currState,
-      prngState: nextPrngState,
+      prngState: newPrngState,
     };
     currState = pipeHelper(currState, updateScores, updateDealer, setPlayersHandUsing(deck, cardsPerPlayer), removePlayersBidsTricksWonAndPlayedCards);
     const doesDealerNeedToChooseTrump = trumpCard.rank === Infinity;
@@ -68,19 +72,6 @@ const pipeHelper = (...args) => {
     result = f(result);
   }
   return result;
-};
-
-const generateDeckAndGetNextPrngState = (prngState) => {
-  const xorshift = new Xorshift(prngState);
-  const deck = generateOrderedDeck();
-  for (let i = 0; i < 256; i++) {
-    deck.sort(() => xorshift.random() - 0.5);
-  }
-  const nextPrngState = xorshift.randomint().concat(xorshift.randomint());
-  return {
-    deck,
-    nextPrngState,
-  };
 };
 
 const setTrumpTo = (cardOrElement) => (currState) => {

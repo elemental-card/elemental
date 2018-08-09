@@ -1,24 +1,3 @@
-export const generateOrderedDeck = () => {
-  const deck = [];
-  for (const element of ['fire', 'water', 'earth', 'air']) {
-    for (let rank = 2; rank <= 14; rank++) {
-      deck.push({
-        rank,
-        element,
-      });
-    }
-  }
-  for (const rank of [0, Infinity]) {
-    for (let i = 0; i < 4; i++) {
-      deck.push({
-        rank,
-        element: 'magic',
-      });
-    }
-  }
-  return deck;
-};
-
 export const getWinnerIndex = (playedCards, trumpElementOrNull) => {
   const infinityIndex = playedCards.findIndex(c => c.rank === Infinity);
   if (infinityIndex !== -1) {
@@ -56,4 +35,25 @@ export const getWinnerIndex = (playedCards, trumpElementOrNull) => {
     return highestLeadIndex;
   }
   throw new Error('Impossible outcome: nobody won the trick.');
+};
+
+export const getOrderedDeck = () => {
+  const deck = [];
+  for (const element of ['fire', 'water', 'earth', 'air']) {
+    for (let rank = 2; rank <= 14; rank++) {
+      deck.push({
+        rank,
+        element,
+      });
+    }
+  }
+  for (const rank of [0, Infinity]) {
+    for (let i = 0; i < 4; i++) {
+      deck.push({
+        rank,
+        element: 'magic',
+      });
+    }
+  }
+  return deck;
 };
