@@ -4,12 +4,12 @@ import xorshift from 'xorshift';
 
 const Xorshift = xorshift.constructor;
 
-const nextGameState = (currState, action) => {
+export default (currState, choice) => {
   if (currState.type === 'CHOOSING_TRUMP') {
-    return pipeHelper(currState, setTrumpTo(action), setPlayersBidsToNull, setStateTypeToBidding);
+    return pipeHelper(currState, setTrumpTo(choice), setPlayersBidsToNull, setStateTypeToBidding);
   }
   if (currState.type === 'BIDDING') {
-    currState = pipeHelper(currState, setPlayerBidTo(action));
+    currState = pipeHelper(currState, setPlayerBidTo(choice));
     const numberOfPlayers = currState.players.length;
     const playersThatBid = currState.players.filter(p => p.bid !== null).length;
     if (playersThatBid < numberOfPlayers) {
@@ -18,7 +18,7 @@ const nextGameState = (currState, action) => {
     return pipeHelper(currState, setPlayersTricksWonToZero, setPlayersPlayedCardToNull, setNextDealer, setStateTypeToChoosingCard);
   }
   if (currState.type === 'CHOOSING_CARD') {
-    currState = pipeHelper(currState, removeCardFromPlayerHand(action), setPlayerPlayedCardTo(action));
+    currState = pipeHelper(currState, removeCardFromPlayerHand(choice), setPlayerPlayedCardTo(choice));
     const numberOfPlayers = currState.players.length;
     const numberOfPlayersThatPlayedACard = currState.players.filter(p => p.playedCard !== null).length;
     if (numberOfPlayersThatPlayedACard < numberOfPlayers) {
@@ -332,5 +332,3 @@ const setStateTypeToChoosingTrump = (currState) => {
     type: 'CHOOSING_TRUMP',
   };
 };
-
-export default nextGameState;
