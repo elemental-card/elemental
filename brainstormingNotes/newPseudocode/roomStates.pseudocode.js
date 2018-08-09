@@ -1,4 +1,4 @@
-const states = lobby
+const roomStates = lobby
   || playing;
 
 const lobby = {

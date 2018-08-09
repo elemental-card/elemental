@@ -95,6 +95,7 @@ export default (roomDoc) => {
   }, {
     type: 'PREGAME',
     hostName,
+    hostUid,
     players: [
       {
         uid: hostUid,
