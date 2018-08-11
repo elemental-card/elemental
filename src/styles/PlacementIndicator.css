@@ -1,0 +1,23 @@
+.PlacementIndicator {
+  width: 8vh;
+  height: 8vh;
+  border-radius: 8vh;
+  color: white;
+  background-color: midnightblue;
+  display: inline-block;
+  text-align: center;
+  line-height: 8vh;
+  margin: 0 2vh 1vh 0;
+}
+
+.PlacementIndicator--gold {
+  background-color: gold;
+}
+
+.PlacementIndicator--silver {
+  background-color: silver;
+}
+
+.PlacementIndicator--bronze {
+  background-color: #630;
+}

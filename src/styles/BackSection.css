@@ -1,0 +1,55 @@
+.BackSection {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 34vh;
+  height: 50vh;
+  background-color: #101010;
+  border-top: 1px solid #444444;
+}
+
+.BackSection__Label {
+  color: white;
+  text-align: center;
+  font-size: 6vh;
+  margin-top: 1vh;
+}
+
+.BackSection__Button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background-color: maroon;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 30vh;
+  text-align: center;
+  line-height: 30vh;
+  font-size: 24vh;
+  margin: 0 2vh 0 2vh;
+}
+
+.BackSection__Button__Cross {
+  display: inline-block;
+  position: relative;
+  transform: translate(-4vh, -14vh) rotate(45deg);
+}
+
+.BackSection__Button__Cross::before {
+    content: "";
+    position: absolute;
+    width:3vh;
+    height:15vh;
+    background-color:#ccc;
+    top: -6vh;
+    left: 6vh;
+}
+
+.BackSection__Button__Cross::after {
+    content: "";
+    position: absolute;
+    width: 15vh;
+    height: 3vh;
+    background-color:#ccc;
+}

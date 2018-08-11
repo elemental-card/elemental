@@ -1,0 +1,21 @@
+.HomeScreen__Join,
+.HomeScreen__Create {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  text-align: center;
+  line-height: 100vh;
+  font-size: 10vh;
+  color: #EEE;
+}
+
+.HomeScreen__Join {
+  left: 0;
+  background-color: #3aa3dd;
+}
+
+.HomeScreen__Create {
+  left: 50vw;
+  background-color: green;
+}

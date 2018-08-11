@@ -1,25 +1,21 @@
 import React from 'react';
+import '../styles/Card.css';
 
-const getClassName = (element, isTrump) => {
-  return 'Card Card--' + element + (isTrump
-    ? ' Card--trump'
-    : ''
-  );
-};
+const NOOP = () => undefined;
 
-const formatRank = (rank) => {
-  if (rank === Infinity) {
-    return '∞';
-  }
-  return rank;
-};
+const getClassName = (element, isSelected, isTrump) => (
+  'Card Card--' + element +
+  (isSelected ? ' Card--selected' : '') +
+  (isTrump ? ' Card--trump' : '')
+);
 
-const Card = ({ rank, element, isTrump, onClick }) => {
-  return (
-    <div className={getClassName(element, isTrump)} onClick={onClick}>
-      <div className="Card__Rank">{formatRank(rank)}</div>
-    </div>
-  );
-};
+const formatRank = (rank) => rank === Infinity ? '∞' : String(rank);
 
-export default Card;
+export default ({ card, isSelected, isTrump, onClick = NOOP }) => (
+  <div
+    className={getClassName(card.element, isSelected, isTrump)}
+    onClick={() => onClick(card)}
+  >
+    <div className="Card__Rank">{formatRank(card.rank)}</div>
+  </div>
+);

@@ -1,0 +1,38 @@
+.BidTable {
+  position: absolute;
+  top: 15vh;
+}
+
+.BidTable__Name {
+  display: inline-block;
+  width: 30vh;
+  text-align: center;
+  margin: 0 2vh 2vh 2vh;
+  font-size: 6vh;
+  color: #ddd;
+}
+
+.BidTable__Bid {
+  display: inline-block;
+  width: 30vh;
+  border-radius: 2vh;
+  text-align: center;
+  margin: 2vh;
+  font-size: 10vh;
+  color: #ddd;
+  background-color: darkblue;
+}
+
+.BidTable__Bid--tentative {
+  animation: 0.5s infinite alternate blink-green;
+}
+
+@keyframes blink-green {
+  from {
+    box-shadow: none;
+  }
+
+  to {
+    box-shadow: 0 0 10vh 1vh lime;
+  }
+}

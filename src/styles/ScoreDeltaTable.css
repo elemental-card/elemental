@@ -1,0 +1,52 @@
+.ScoreDeltaTable {
+  position: absolute;
+  top: 15vh;
+}
+
+.ScoreDeltaTable__Name {
+  display: inline-block;
+  width: 30vh;
+  text-align: center;
+  margin: 0 2vh 2vh 2vh;
+  font-size: 6vh;
+  color: #ddd;
+}
+
+.ScoreDeltaTable__Score {
+  display: inline-block;
+  width: 30vh;
+  border-radius: 2vh;
+  text-align: center;
+  margin: 2vh;
+  font-size: 10vh;
+  color: #ddd;
+  background-color: darkblue;
+}
+
+.ScoreDeltaTable__ScoreBreakdown {
+  display: inline-block;
+  width: 30vh;
+  border-radius: 2vh;
+  text-align: center;
+  margin: 2vh;
+  font-size: 6vh;
+  color: #ddd;
+}
+
+.ScoreDeltaTable__ScoreDelta--negative {
+  color: #c00;
+}
+
+.ScoreDeltaTable__ScoreDelta--positive {
+  color: green;
+}
+
+@keyframes blink-green {
+  from {
+    box-shadow: none;
+  }
+
+  to {
+    box-shadow: 0 0 10vh 1vh lime;
+  }
+}

@@ -1,0 +1,22 @@
+.TrumpSection {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 34vh;
+  height: 50vh;
+  background-color: #101010;
+  border-top: 1px solid #444444;
+}
+
+.TrumpSection__Label {
+  color: white;
+  text-align: center;
+  font-size: 6vh;
+  margin-top: 1vh;
+}
+
+.TrumpSection__CardContainer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

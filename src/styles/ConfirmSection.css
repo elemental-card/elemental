@@ -1,0 +1,69 @@
+.ConfirmSection {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 34vh;
+  height: 50vh;
+  background-color: #101010;
+}
+
+.ConfirmSection__Label {
+  color: #444;
+  text-align: center;
+  font-size: 6vh;
+  margin-top: 1vh;
+}
+
+.ConfirmSection__Label--enabled {
+  color: white;
+}
+
+.ConfirmSection__Button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #004000;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 30vh;
+  text-align: center;
+  line-height: 30vh;
+  font-size: 24vh;
+  margin: 0 2vh 0 2vh;
+}
+
+.ConfirmSection__Button--enabled {
+  background-color: green;
+}
+
+.ConfirmSection__Button__Checkbox {
+  display: inline-block;
+  position: relative;
+  transform: translate(-5vh, -10vh) rotate(45deg);
+}
+
+.ConfirmSection__Button__Checkbox::before {
+    content: "";
+    position: absolute;
+    width:3vh;
+    height:15vh;
+    background-color:#444;
+    top: -12vh;
+    left: 5vh;
+}
+
+.ConfirmSection__Button__Checkbox--enabled::before {
+  background-color:#ccc;
+}
+
+.ConfirmSection__Button__Checkbox::after {
+    content: "";
+    position: absolute;
+    width: 5vh;
+    height: 3vh;
+    background-color:#444;
+}
+
+.ConfirmSection__Button__Checkbox--enabled::after {
+  background-color:#ccc;
+}

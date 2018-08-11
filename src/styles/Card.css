@@ -1,0 +1,91 @@
+.Card {
+  position: relative;
+  display: inline-block;
+  color: white;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 30vh;
+  text-align: center;
+  line-height: 30vh;
+  font-size: 24vh;
+  margin: 0 2vh 0 2vh;
+}
+
+.Card--fire {
+  background-color: darkorange;
+}
+
+.Card--water {
+  background-color: #08b;
+}
+
+.Card--earth {
+  background-color: black;
+  color: #eee;
+}
+
+.Card--air {
+  background-color: white;
+  color: #444444;
+}
+
+.Card--trump {
+  box-shadow: 0 0 10vh 1vh #8888ff;
+}
+
+.Card--magic {
+  background-color: black;
+  --blur: 3vh;
+  --spread: -2vh;
+  --inblur: 10vh;
+  --inspread: -2vh;
+  --inoffset: 4vh;
+  box-shadow: -2vh -2vh var(--blur) var(--spread) darkorange,
+    2vh -2vh var(--blur) var(--spread) #08b,
+    2vh 2vh var(--blur) var(--spread) white,
+    -2vh 2vh var(--blur) var(--spread) black,
+    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread) darkorange,
+    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
+    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
+    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
+}
+
+.Card--magic.Card--trump {
+  --blur: 3vh;
+  --spread: -2vh;
+  --inblur: 10vh;
+  --inspread: -2vh;
+  --inoffset: 4vh;
+  box-shadow: 0 0 10vh 1vh #8888ff,
+    -2vh -2vh var(--blur) var(--spread) darkorange,
+    2vh -2vh var(--blur) var(--spread) #08b,
+    2vh 2vh var(--blur) var(--spread) white,
+    -2vh 2vh var(--blur) var(--spread) black,
+    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread) darkorange,
+    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
+    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
+    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
+}
+
+.Card--selected::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 30vh;
+  box-shadow: 0 0 10vh 1vh lime;
+  animation: 0.5s infinite alternate card-blink-green;
+}
+
+@keyframes card-blink-green {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

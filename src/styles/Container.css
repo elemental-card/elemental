@@ -1,0 +1,60 @@
+.Container {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.Container--lightGrey {
+  background-color: #444444;
+}
+
+.Container--darkGrey {
+  background-color: #222222;
+}
+
+.Container--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Container--left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 34vh);
+  height: 100vh;
+}
+
+.Container--topLeft {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 34vh);
+  height: 50vh;
+}
+
+.Container--bottomLeft {
+  position: fixed;
+  top: 50vh;
+  left: 0;
+  width: calc(100vw - 34vh);
+  height: 50vh;
+}
+
+.Container--topCenter {
+  position: fixed;
+  top: 0;
+  left: 34vh;
+  width: calc(100vw - 68vh);
+  height: 50vh;
+}
+
+.Container--bottomCenter {
+  position: fixed;
+  top: 50vh;
+  left: 34vh;
+  width: calc(100vw - 68vh);
+  height: 50vh;
+}

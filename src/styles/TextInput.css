@@ -1,0 +1,11 @@
+.TextInput {
+  position: fixed;
+  top: 20vh;
+  left: 10vh;
+  border: none;
+  width: 20vw;
+  height: 15vh;
+  border-radius: 2vh;
+  font-size: 10vh;
+  padding: 2vh;
+}

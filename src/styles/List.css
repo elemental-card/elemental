@@ -1,0 +1,19 @@
+.List {
+  position: fixed;
+  top: 15vh;
+  left: 10vw;
+}
+
+.List__Item {
+  color: white;
+  font-size: 6vh;
+  margin: 2vh;
+  padding: 2vh;
+  width: 50vw;
+  border-radius: 1vh;
+  background-color: #004080;
+}
+
+.List__Item--selected {
+  background-color: #3aa3dd;
+}

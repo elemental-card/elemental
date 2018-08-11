@@ -1,0 +1,48 @@
+/* https://github.com/lukehaas/css-loaders */
+.LoadingSpinner,
+.LoadingSpinner:before,
+.LoadingSpinner:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: load7 1.8s infinite ease-in-out;
+}
+
+.LoadingSpinner {
+  color: #ffffff;
+  font-size: 3vh;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  animation-delay: -0.16s;
+}
+
+.LoadingSpinner:before,
+.LoadingSpinner:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+
+.LoadingSpinner:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+
+.LoadingSpinner:after {
+  left: 3.5em;
+}
+
+@keyframes load7 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #888;
+  }
+
+  40% {
+    box-shadow: 0 2.5em 0 0 #ffffff;
+  }
+}
