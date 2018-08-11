@@ -1,5 +1,6 @@
 import React from 'react';
-import CardList from './CardList';
+import Card from './Card';
+import { canCardBePlayed } from '../gameLogic/cardUtils';
 import '../styles/Hand.css';
 
 const NOOP = () => undefined;
@@ -7,16 +8,20 @@ const NOOP = () => undefined;
 export default ({
   cards,
   trumpElement,
+  playedCards = [],
   selectedCardIndex = -1,
 
   onSelectIndex = NOOP,
 }) => (
   <div className="Hand">
-    <CardList
-      cards={cards}
-      selectedCardIndex={selectedCardIndex}
-      trumpElement={trumpElement}
-      onClick={(card) => onSelectIndex(cards.indexOf(card))}
-    />
+    {cards.map((card, i) => (
+      <Card
+        card={card}
+        isSelected={i === selectedCardIndex}
+        isTrump={card.element === trumpElement}
+        isDisabled={!canCardBePlayed(card, playedCards, cards)}
+        onClick={() => onSelectIndex(i)}
+      />
+    ))}
   </div>
 );

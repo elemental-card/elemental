@@ -27,6 +27,10 @@ export default ({
     <Hand
       cards={hand}
       trumpElement={trumpCard.element}
+      playedCards={
+        players.filter(p => p.playedCard !== null)
+          .map(p => p.playedCard)
+      }
     />
   </Container>
 ];

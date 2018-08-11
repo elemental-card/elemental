@@ -36,6 +36,10 @@ export default ({
       cards={hand}
       selectedCardIndex={tentativeCardIndex}
       trumpElement={trumpCard.element}
+      playedCards={
+        players.filter(p => p.playedCard !== null)
+          .map(p => p.playedCard)
+      }
       onSelectIndex={onSelectTentativeCardIndex}
     />
   </Container>
