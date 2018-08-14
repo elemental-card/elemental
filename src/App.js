@@ -352,6 +352,34 @@ export default class extends React.Component {
         },
       }));
     } else if (
+      oldAppState.type === 'CHOOSE_CARD'
+      && (
+        newRoomState.gameState.type === 'CHOOSING_TRUMP'
+        || newRoomState.gameState.type === 'BIDDING'
+      )
+    ) {
+      this.setState((prevState) => {
+        const scoreBreakdowns = oldRoomState.gameState.players.map((player) => {
+          const currentScore = player.score;
+          const oldScore = oldRoomState.gameState.players
+            .find(p => p.name === player.name).score;
+          return {
+            name: player.name,
+            score: currentScore,
+            delta: currentScore - oldScore,
+          };
+        });
+        return {
+          appState: {
+            type: 'HAND_RESULT',
+            uid: oldAppState.uid,
+            trump: oldRoomState.gameState.trump,
+            scoreBreakdowns,
+            roomState: newRoomState,
+          },
+        };
+      });
+    } else if (
       oldAppState.type === 'TRUMP_RESULT'
       || oldAppState.type === 'BID_RESULT'
       || oldAppState.type === 'TRICK_RESULT'
