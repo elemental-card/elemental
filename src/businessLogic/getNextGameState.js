@@ -294,7 +294,7 @@ const updateDealer = (currState) => {
   const indexOfNewDealer = currState.players.findIndex(p => p.name === newDealerName);
   const indexOfNewLeader = indexOfNewDealer + 1 === currState.players.length
     ? 0
-    : indexOfNewLeader + 1;
+    : indexOfNewDealer + 1;
   return {
     ...currState,
     players: currState.players.slice(indexOfNewLeader).concat(currState.players.slice(0, indexOfNewLeader)),

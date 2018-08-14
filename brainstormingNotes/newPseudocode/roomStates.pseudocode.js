@@ -12,6 +12,7 @@ const lobby = {
 };
 
 const playing = {
+  hostName: 'string',
   players: [
     {
       uid: 'string',

@@ -1,5 +1,5 @@
 const getElementOfTrump = (trump) => {
-  if (trump.type === 'noTrump') {
+  if (trump.type === 'zero' || trump.type === 'noCard') {
     return null;
   }
   if (trump.type === 'card') {

@@ -4,7 +4,7 @@ import TrumpSection from '../components/TrumpSection';
 import Container from '../components/Container';
 import Header from '../components/Header';
 import ScoreDeltaTable from '../components/ScoreDeltaTable';
-
+// TODO refactor props
 export default ({
   players,
   scoreDeltas,

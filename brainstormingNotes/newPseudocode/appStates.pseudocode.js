@@ -79,13 +79,13 @@ const waitForTrumpElementToBeChosen = {
 
 const trumpElementResult = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
   accept() {},
 };
 
 const chooseBid = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
   tentativeBid: 'number',
   selectTentativeBid(bid) {},
   confirmTentativeBid() {},
@@ -117,20 +117,36 @@ const waitForOpponentsToChooseCard = {
 
 const trickResults = {
   uid: 'string',
+  // hand: ['card'],
+  trump: 'trumpEnum',
+  players: [
+    {
+      name: 'string',
+      tricksWon: 'number',
+      bid: 'number',
+      playedCard: 'card',
+    }
+  ],
   roomState,
   accept() {},
 };
 
 const handResults = {
   uid: 'string',
+  trump: 'trumpEnum',
+  scoreBreakdowns: [
+    {
+      name: 'string',
+      score: 'number',
+      delta: 'number',
+    }
+  ],
   roomState,
   accept() {},
 };
 
 const gameResults = {
   uid: 'string',
-  roomState,
+  viewedRoomState,
   accept() {},
 };
-
-// TODO reconsider results states

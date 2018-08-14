@@ -41,7 +41,9 @@ export default (roomDoc) => {
     if (
       roomState.type === 'PREGAME'
       && action.type === 'HOST_START'
-      && roomState.hostName === action.author
+      && roomState.players.find(p => p.uid === action.author)
+      && roomState.players.find(p => p.uid === action.author).name
+        === roomState.hostName
       && roomState.players.length >= 3
       && Array.isArray(action.prngState)
       && action.prngState.length === 4
@@ -91,13 +93,19 @@ export default (roomDoc) => {
       && roomState.players.find(p => p.uid === action.author)
       && roomState.players.find(p => p.uid === action.author).name
         === getActivePlayerName(roomState.gameState)
-      && roomState.gameState.players.find(p => p.uid === action.author)
+      && roomState.gameState.players.find(
+          p => p.name
+            === roomState.players.find(p => p.uid === action.author).name
+        )
         .hand.map(getCardCodeFromCard).includes(action.cardCode)
       && canCardBePlayed(
         getCardFromCardCode(action.cardCode),
         roomState.gameState.players.filter(p => p.playedCard !== null)
           .map(p => p.playedCard),
-        roomState.gameState.players.find(p => p.uid === action.author).hand,
+        roomState.gameState.players.find(
+          p => p.name
+            === roomState.players.find(p => p.uid === action.author).name
+        ).hand,
       )
     ) {
       return {
@@ -106,6 +114,7 @@ export default (roomDoc) => {
       };
     }
 
+    console.log('illegal action: ', action, roomState);
     return roomState;
   }, {
     type: 'PREGAME',
