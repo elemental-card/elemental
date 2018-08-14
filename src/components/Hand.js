@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { canCardBePlayed } from '../gameLogic/cardUtils';
+import { canCardBePlayed } from '../businessLogic/cardUtils';
 import '../styles/Hand.css';
 
 const NOOP = () => undefined;

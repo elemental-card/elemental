@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { getWinnerIndex } from '../gameLogic/cardUtils';
+import { getWinnerIndex } from '../businessLogic/cardUtils';
 import '../styles/CardTable.css';
 
 export default ({ players, trumpElement, tentativeCard = null }) => {
