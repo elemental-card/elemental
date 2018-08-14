@@ -239,7 +239,7 @@ export default class extends React.Component {
       case 'TRICK_RESULT':
         return (
           <TrickResultScreen
-            hand={getOwnHandFromAppState(this.state.appState)}
+            hand={this.state.appState.hand}
             trumpCard={
               getDisplayCardOfTrump(this.state.appState.trump)
             }
@@ -327,30 +327,40 @@ export default class extends React.Component {
         || newRoomState.gameState.type === 'BIDDING'
       )
     ) {
-      this.setState((prevState) => ({
-        appState: {
-          type: 'TRICK_RESULT',
-          uid: prevState.appState.uid,
-          trump: oldRoomState.gameState.trump,
-          players: oldRoomState.gameState.players.map((player) => {
-            if (player.playedCard !== null) {
-              return player;
-            }
-            const newPlayer = newRoomState.gameState.players
-              .find(p => p.name === player.name);
-            const playedCard = player.hand.length === 1
-              ? player.hand[0]
-              : player.hand.find((card) => (
-                !newPlayer.hand.includes(card)
-              ));
-            return {
-              ...player,
-              playedCard,
-            };
-          }),
-          roomState: newRoomState,
-        },
-      }));
+      this.setState((prevState) => {
+        const { name: ownName } = oldRoomState.players
+          .find(p => p.uid === oldAppState.uid);
+        const oldSelf = oldRoomState.gameState.players
+          .find(p => p.name === ownName);
+        const hand = oldSelf.hand.length <= 1
+          ? []
+          : newRoomState.gameState.players.find(p => p.name === ownName).hand;
+        return {
+          appState: {
+            type: 'TRICK_RESULT',
+            uid: prevState.appState.uid,
+            hand,
+            trump: oldRoomState.gameState.trump,
+            players: oldRoomState.gameState.players.map((player) => {
+              if (player.playedCard !== null) {
+                return player;
+              }
+              const newPlayer = newRoomState.gameState.players
+                .find(p => p.name === player.name);
+              const playedCard = player.hand.length === 1
+                ? player.hand[0]
+                : player.hand.find((card) => (
+                  !newPlayer.hand.includes(card)
+                ));
+              return {
+                ...player,
+                playedCard,
+              };
+            }),
+            roomState: newRoomState,
+          },
+        };
+      });
     } else if (
       oldAppState.type === 'CHOOSE_CARD'
       && (

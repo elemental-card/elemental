@@ -117,7 +117,7 @@ const waitForOpponentsToChooseCard = {
 
 const trickResults = {
   uid: 'string',
-  // hand: ['card'],
+  hand: ['card'],
   trump: 'trumpEnum',
   players: [
     {
