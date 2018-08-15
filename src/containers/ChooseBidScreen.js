@@ -13,6 +13,7 @@ export default ({
   players,
   trumpCard,
   tentativeBid,
+  isPending,
 
   onSelectTentativeBid,
   onConfirmTentativeBid,
@@ -32,7 +33,7 @@ export default ({
     <IncrementBidSection onClick={safelyIncrementBid} />,
     <DecrementBidSection onClick={safelyDecrementBid} />,
     <ConfirmSection
-      status="enabled"
+      status={isPending ? 'pending' : 'enabled'}
       onClick={onConfirmTentativeBid}
       label="Confirm"
     />,

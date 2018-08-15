@@ -37,6 +37,7 @@ const chooseLobbyToJoin = {
 const chooseInitialsForCreating = {
   uid: 'string',
   tentativeInitials: 'string',
+  isPending: 'boolean',
   editTentativeInitials(initials) {},
   confirmTentativeInitials() {},
   back() {},
@@ -46,6 +47,7 @@ const chooseInitialsForJoining = {
   uid: 'string',
   hostUid: 'string',
   tentativeInitials: 'string',
+  isPending: 'boolean',
   editTentativeInitials(initials) {},
   confirmTentativeInitials() {},
   back() {},
@@ -54,6 +56,7 @@ const chooseInitialsForJoining = {
 const startLobby = {
   uid: 'string',
   roomState: 'roomState',
+  status: 'starting' || 'leaving' || 'noPendingReqs',
   start() {},
   destroyLobby() {},
 };
@@ -61,6 +64,7 @@ const startLobby = {
 const waitForHostToStart = {
   uid: 'string',
   roomState: 'roomState',
+  isPending: 'boolean',
   leave() {},
 };
 
@@ -68,6 +72,7 @@ const chooseTrumpElement = {
   uid: 'string',
   roomState: 'roomState',
   tentativeElement: option('string'),
+  isPending: 'boolean',
   selectTentativeElement() {},
   confirmTentativeElement() {},
 };
@@ -87,6 +92,7 @@ const chooseBid = {
   uid: 'string',
   roomState,
   tentativeBid: 'number',
+  isPending: 'boolean',
   selectTentativeBid(bid) {},
   confirmTentativeBid() {},
 };
@@ -106,6 +112,7 @@ const chooseCard = {
   uid: 'string',
   roomState,
   tentativeCardIndex: 'number',
+  isPending: 'boolean',
   selectTentativeCardIndex(index) {},
   confirmTentativeCardIndex() {},
 };

@@ -8,17 +8,22 @@ import ListItem from '../components/ListItem';
 
 export default ({
   players,
+  status,
 
   onStart,
   onLeave,
 }) => [
   <ConfirmSection
-    status={players.length >= 3 ? 'enabled' : 'disabled'}
+    status={
+      status === 'starting'
+        ? 'pending'
+        : players.length >= 3 ? 'enabled' : 'disabled'
+    }
     onClick={onStart}
     label="Start Game"
   />,
   <BackSection
-    status="enabled"
+    status={status === 'leaving' ? 'pending' : 'enabled'}
     onClick={onLeave}
     label="Leave"
   />,

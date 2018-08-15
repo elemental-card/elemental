@@ -10,12 +10,17 @@ export default ({
   players,
   trumpCard,
   tentativeCardIndex,
+  isPending,
 
   onSelectTentativeCardIndex,
   onConfirmTentativeCardIndex,
 }) => [
   <ConfirmSection
-    status={tentativeCardIndex !== -1 ? 'enabled' : 'disabled'}
+    status={
+      isPending
+        ? 'pending'
+        : tentativeCardIndex !== -1 ? 'enabled' : 'disabled'
+    }
     onClick={onConfirmTentativeCardIndex}
     label="Confirm"
   />,

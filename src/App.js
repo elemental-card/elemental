@@ -71,6 +71,7 @@ export default class extends React.Component {
       'navigateToHomeScreen',
       'navigateToBrowseScreen',
       'updateRoomState',
+      'indicatePendingSubmission',
       'onHomeJoin',
       'onHomeCreate',
       'onBrowseSelect',
@@ -127,6 +128,7 @@ export default class extends React.Component {
         return (
           <InitialChoosingScreen
             tentativeInitials={this.state.appState.tentativeInitials}
+            isPending={this.state.appState.isPending}
             onEditTentativeInitials={this.onJoiningInitialEdit}
             onConfirmTentativeInitials={this.onJoiningInitialConfirm}
             onBack={this.navigateToBrowseScreen}
@@ -136,6 +138,7 @@ export default class extends React.Component {
         return (
           <InitialChoosingScreen
             tentativeInitials={this.state.appState.tentativeInitials}
+            isPending={this.state.appState.isPending}
             onEditTentativeInitials={this.onCreatingInitialEdit}
             onConfirmTentativeInitials={this.onCreatingInitialConfirm}
             onBack={this.navigateToHomeScreen}
@@ -145,6 +148,7 @@ export default class extends React.Component {
         return (
           <StartLobbyScreen
             players={this.state.appState.roomState.players}
+            status={this.state.appState.status}
             onStart={this.onLobbyStart}
             onLeave={this.onLobbyDelete}
           />
@@ -153,6 +157,7 @@ export default class extends React.Component {
         return (
           <WaitForHostToStartLobbyScreen
             players={this.state.appState.roomState.players}
+            isPending={this.state.appState.isPending}
             onLeave={this.onLobbyLeave}
           />
         );
@@ -161,6 +166,7 @@ export default class extends React.Component {
           <ChooseTrumpElementScreen
             hand={getOwnHandFromAppState(this.state.appState)}
             tentativeElement={this.state.appState.tentativeElement}
+            isPending={this.state.appState.isPending}
             onSelectTentativeElement={this.onTrumpSelect}
             onConfirmTentativeElement={this.onTrumpConfirm}
           />
@@ -188,6 +194,7 @@ export default class extends React.Component {
             }
             players={this.state.appState.roomState.gameState.players}
             tentativeBid={this.state.appState.tentativeBid}
+            isPending={this.state.appState.isPending}
             onSelectTentativeBid={this.onBidSelect}
             onConfirmTentativeBid={this.onBidConfirm}
           />
@@ -222,6 +229,7 @@ export default class extends React.Component {
             }
             players={this.state.appState.roomState.gameState.players}
             tentativeCardIndex={this.state.appState.tentativeCardIndex}
+            isPending={this.state.appState.isPending}
             onSelectTentativeCardIndex={this.onCardSelect}
             onConfirmTentativeCardIndex={this.onCardConfirm}
           />
@@ -416,6 +424,7 @@ export default class extends React.Component {
                   type: 'START_LOBBY',
                   uid: ownUid,
                   roomState: newRoomState,
+                  status: 'noPendingReqs',
                 },
               };
             } else {
@@ -424,6 +433,7 @@ export default class extends React.Component {
                   type: 'WAIT_FOR_START',
                   uid: ownUid,
                   roomState: newRoomState,
+                  isPending: false,
                 },
               };
             }
@@ -437,6 +447,7 @@ export default class extends React.Component {
                       uid: ownUid,
                       roomState: newRoomState,
                       tentativeElement: null,
+                      isPending: false,
                     },
                   };
                 } else {
@@ -456,6 +467,7 @@ export default class extends React.Component {
                       uid: ownUid,
                       roomState: newRoomState,
                       tentativeBid: 0,
+                      isPending: false,
                     },
                   };
                 } else {
@@ -475,6 +487,7 @@ export default class extends React.Component {
                       uid: ownUid,
                       roomState: newRoomState,
                       tentativeCardIndex: -1,
+                      isPending: false,
                     },
                   };
                 } else {
@@ -498,6 +511,15 @@ export default class extends React.Component {
     }
   }
 
+  indicatePendingSubmission() {
+    this.setState((prevState) => ({
+      appState: {
+        ...prevState.appState,
+        isPending: true,
+      },
+    }));
+  }
+
   onHomeJoin() {
     this.navigateToBrowseScreen();
   }
@@ -508,6 +530,7 @@ export default class extends React.Component {
         type: 'CHOOSE_INITIALS_FOR_CREATING',
         uid: prevState.appState.uid,
         tentativeInitials: '',
+        isPending: false,
       },
     }));
   }
@@ -528,6 +551,7 @@ export default class extends React.Component {
         uid: prevState.appState.uid,
         hostUid: prevState.appState.tentativePlayer.uid,
         tentativeInitials: '',
+        isPending: false,
       },
     }));
   }
@@ -542,6 +566,8 @@ export default class extends React.Component {
   }
 
   onJoiningInitialConfirm() {
+    this.indicatePendingSubmission();
+
     const { uid, hostUid, tentativeInitials } = this.state.appState;
     firebaseUtils.joinRoom(hostUid, uid, tentativeInitials).then(() => {
       this.unsubscribeToRoomUpdates = firebaseUtils.onActionAppended(hostUid, (roomExists, roomState) => {
@@ -569,6 +595,8 @@ export default class extends React.Component {
   }
 
   onCreatingInitialConfirm() {
+    this.indicatePendingSubmission();
+
     const { uid, tentativeInitials } = this.state.appState;
     firebaseUtils.createRoom(uid, tentativeInitials).then(() => {
       this.unsubscribeToRoomUpdates = firebaseUtils.onActionAppended(uid, (roomExists, roomState) => {
@@ -587,11 +615,25 @@ export default class extends React.Component {
   }
 
   onLobbyStart() {
+    this.setState((prevState) => ({
+      appState: {
+        ...prevState.appState,
+        status: 'starting',
+      },
+    }));
+
     const { uid } = this.state.appState;
     firebaseUtils.startRoom(uid);
   }
 
   onLobbyDelete() {
+    this.setState((prevState) => ({
+      appState: {
+        ...prevState.appState,
+        status: 'leaving',
+      },
+    }));
+
     const { uid } = this.state.appState;
     this.unsubscribeToRoomUpdates();
     firebaseUtils.deleteRoom(uid);
@@ -599,6 +641,8 @@ export default class extends React.Component {
   }
 
   onLobbyLeave() {
+    this.indicatePendingSubmission();
+
     const { uid, roomState } = this.state.appState;
     const hostUid = getHostUidOfRoomState(roomState);
     this.unsubscribeToRoomUpdates();
@@ -616,6 +660,8 @@ export default class extends React.Component {
   }
 
   onTrumpConfirm() {
+    this.indicatePendingSubmission();
+
     const { uid, roomState, tentativeElement } = this.state.appState;
     const hostUid = getHostUidOfRoomState(roomState);
     firebaseUtils.chooseTrumpElement(hostUid, uid, tentativeElement);
@@ -635,6 +681,7 @@ export default class extends React.Component {
           uid: prevState.appState.uid,
           roomState: prevState.appState.roomState,
           tentativeBid: 0,
+          isPending: false,
         }
         : {
           type: 'WAIT_FOR_BID',
@@ -655,6 +702,8 @@ export default class extends React.Component {
   }
 
   onBidConfirm() {
+    this.indicatePendingSubmission();
+
     const { uid, roomState, tentativeBid } = this.state.appState;
     const hostUid = getHostUidOfRoomState(roomState);
     firebaseUtils.chooseBid(hostUid, uid, tentativeBid);
@@ -674,6 +723,7 @@ export default class extends React.Component {
           uid: prevState.appState.uid,
           roomState: prevState.appState.roomState,
           tentativeCardIndex: -1,
+          isPending: false,
         }
         : {
           type: 'WAIT_FOR_CARD',
@@ -694,6 +744,8 @@ export default class extends React.Component {
   }
 
   onCardConfirm() {
+    this.indicatePendingSubmission();
+
     const { uid, roomState, tentativeCardIndex } = this.state.appState;
     const hostUid = getHostUidOfRoomState(roomState);
     const { name: ownName } = roomState.players.find(p => p.uid === uid);
@@ -718,6 +770,7 @@ export default class extends React.Component {
             uid: prevState.appState.uid,
             roomState: prevState.appState.roomState,
             tentativeCardIndex: -1,
+            isPending: false,
           }
           : {
             type: 'WAIT_FOR_CARD',
@@ -798,6 +851,7 @@ export default class extends React.Component {
             uid: prevState.appState.uid,
             roomState: prevState.appState.roomState,
             tentativeBid: 0,
+            isPending: false,
           }
           : {
             type: 'WAIT_FOR_BID',

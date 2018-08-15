@@ -9,12 +9,17 @@ import Hand from '../components/Hand';
 export default ({
   hand,
   tentativeElement,
+  isPending,
 
   onSelectTentativeElement,
   onConfirmTentativeElement,
 }) => [
   <ConfirmSection
-    status={tentativeElement !== null ? 'enabled' : 'disabled'}
+    status={
+      isPending
+        ? 'pending'
+        : tentativeElement !== null ? 'enabled' : 'disabled'
+    }
     onClick={onConfirmTentativeElement}
     label="Confirm"
   />,

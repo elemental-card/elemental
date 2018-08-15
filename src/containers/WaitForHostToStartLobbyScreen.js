@@ -8,12 +8,13 @@ import ListItem from '../components/ListItem';
 
 export default ({
   players,
+  isPending,
 
   onLeave,
 }) => [
   <WaitingSection label="Waiting for host to start game..."/>,
   <BackSection
-    status="enabled"
+    status={isPending ? 'pending' : 'enabled'}
     onClick={onLeave}
     label="Leave"
   />,

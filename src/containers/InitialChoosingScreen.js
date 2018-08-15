@@ -9,12 +9,18 @@ const areInitialsValid = (initials) => /^\w{1,3}$/.test(initials);
 
 export default ({
   tentativeInitials,
+  isPending,
+
   onEditTentativeInitials,
   onConfirmTentativeInitials,
   onBack,
 }) => [
   <ConfirmSection
-    status={areInitialsValid(tentativeInitials) ? 'enabled' : 'disabled'}
+    status={
+      isPending
+        ? 'pending'
+        : areInitialsValid(tentativeInitials) ? 'enabled' : 'disabled'
+    }
     onClick={onConfirmTentativeInitials}
     label="Confirm"
   />,
