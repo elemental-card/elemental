@@ -7,7 +7,8 @@
   background-color: #101010;
 }
 
-.ConfirmSection__Label {
+.ConfirmSection__Label--disabled,
+.ConfirmSection__Label--pending {
   color: #444;
   text-align: center;
   font-size: 6vh;
@@ -16,9 +17,13 @@
 
 .ConfirmSection__Label--enabled {
   color: white;
+  text-align: center;
+  font-size: 6vh;
+  margin-top: 1vh;
 }
 
-.ConfirmSection__Button {
+.ConfirmSection__Button--disabled,
+.ConfirmSection__Button--pending {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -33,16 +38,27 @@
 }
 
 .ConfirmSection__Button--enabled {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background-color: green;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 30vh;
+  text-align: center;
+  line-height: 30vh;
+  font-size: 24vh;
+  margin: 0 2vh 0 2vh;
 }
 
-.ConfirmSection__Button__Checkbox {
+.ConfirmSection__Icon--disabled,
+.ConfirmSection__Icon--enabled {
   display: inline-block;
   position: relative;
   transform: translate(-5vh, -10vh) rotate(45deg);
 }
 
-.ConfirmSection__Button__Checkbox::before {
+.ConfirmSection__Icon--disabled::before {
     content: "";
     position: absolute;
     width:3vh;
@@ -52,11 +68,17 @@
     left: 5vh;
 }
 
-.ConfirmSection__Button__Checkbox--enabled::before {
+.ConfirmSection__Icon--enabled::before {
+  content: "";
+  position: absolute;
+  width:3vh;
+  height:15vh;
   background-color:#ccc;
+  top: -12vh;
+  left: 5vh;
 }
 
-.ConfirmSection__Button__Checkbox::after {
+.ConfirmSection__Icon--disabled::after {
     content: "";
     position: absolute;
     width: 5vh;
@@ -64,6 +86,58 @@
     background-color:#444;
 }
 
-.ConfirmSection__Button__Checkbox--enabled::after {
+.ConfirmSection__Icon--enabled::after {
+  content: "";
+  position: absolute;
+  width: 5vh;
+  height: 3vh;
   background-color:#ccc;
+}
+
+/* https://github.com/lukehaas/css-loaders */
+.ConfirmSection__Icon--pending,
+.ConfirmSection__Icon--pending:before,
+.ConfirmSection__Icon--pending:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: confirm-load 1.8s infinite ease-in-out;
+}
+
+.ConfirmSection__Icon--pending {
+  font-size: 2vh;
+  position: fixed;
+  top: 10vh;
+  left: 14.5vh;
+  transform: translate(-50%, -50%);
+  animation-delay: -0.16s;
+}
+
+.ConfirmSection__Icon--pending:before,
+.ConfirmSection__Icon--pending:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+
+.ConfirmSection__Icon--pending:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+
+.ConfirmSection__Icon--pending:after {
+  left: 3.5em;
+}
+
+@keyframes confirm-load {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #444;
+  }
+
+  40% {
+    box-shadow: 0 2.5em 0 0 #ccc;
+  }
 }
