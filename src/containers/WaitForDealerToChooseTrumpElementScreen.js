@@ -9,8 +9,8 @@ export default ({
   hand,
 }) => [
   <ConfirmSection
+    status="disabled"
     label="Continue"
-    isEnabled={false}
   />,
   <TrumpSection
     card={{

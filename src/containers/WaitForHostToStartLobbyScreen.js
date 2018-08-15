@@ -13,6 +13,7 @@ export default ({
 }) => [
   <WaitingSection label="Waiting for host to start game..."/>,
   <BackSection
+    status="enabled"
     onClick={onLeave}
     label="Leave"
   />,

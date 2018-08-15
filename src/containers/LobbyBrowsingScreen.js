@@ -15,11 +15,12 @@ export default ({
   onBack,
 }) => [
   <ConfirmSection
-    isEnabled={tentativePlayer !== null}
+    status={tentativePlayer !== null ? 'enabled' : 'disabled'}
     onClick={onConfirmTentativePlayer}
     label="Confirm"
   />,
   <BackSection
+    status="enabled"
     onClick={onBack}
     label="Home"
   />,

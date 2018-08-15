@@ -15,8 +15,8 @@ export default ({
   onConfirmTentativeCardIndex,
 }) => [
   <ConfirmSection
+    status={tentativeCardIndex !== -1 ? 'enabled' : 'disabled'}
     onClick={onConfirmTentativeCardIndex}
-    isEnabled={tentativeCardIndex !== -1}
     label="Confirm"
   />,
   <TrumpSection

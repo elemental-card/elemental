@@ -32,8 +32,8 @@ export default ({
     <IncrementBidSection onClick={safelyIncrementBid} />,
     <DecrementBidSection onClick={safelyDecrementBid} />,
     <ConfirmSection
+      status="enabled"
       onClick={onConfirmTentativeBid}
-      isEnabled
       label="Confirm"
     />,
     <TrumpSection

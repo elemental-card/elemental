@@ -12,9 +12,9 @@ export default ({
   onContinue,
 }) => [
   <ConfirmSection
-    label="Continue"
-    isEnabled
+    status="enabled"
     onClick={onContinue}
+    label="Continue"
   />,
   <TrumpSection
     card={{

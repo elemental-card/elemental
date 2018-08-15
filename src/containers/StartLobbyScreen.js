@@ -13,11 +13,12 @@ export default ({
   onLeave,
 }) => [
   <ConfirmSection
-    isEnabled={players.length >= 3}
+    status={players.length >= 3 ? 'enabled' : 'disabled'}
     onClick={onStart}
     label="Start Game"
   />,
   <BackSection
+    status="enabled"
     onClick={onLeave}
     label="Leave"
   />,

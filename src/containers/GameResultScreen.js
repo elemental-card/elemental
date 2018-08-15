@@ -13,8 +13,8 @@ export default ({
   onContinue,
 }) => [
   <ConfirmSection
+    status="enabled"
     onClick={onContinue}
-    isEnabled
     label="Continue"
   />,
   <TrumpSection card={null} />,

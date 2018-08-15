@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import PendingSectionsDemo from './PendingSectionsDemo';
+import Demo from './Demo';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<PendingSectionsDemo />, document.getElementById('root'));
+ReactDOM.render(<Demo />, document.getElementById('root'));
 registerServiceWorker();

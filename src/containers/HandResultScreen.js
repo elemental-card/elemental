@@ -13,7 +13,7 @@ export default ({
   onContinue
 }) => [
   <ConfirmSection
-    isEnabled
+    status="enabled"
     onClick={onContinue}
     label="Continue"
   />,

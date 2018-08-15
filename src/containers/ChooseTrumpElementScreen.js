@@ -14,7 +14,7 @@ export default ({
   onConfirmTentativeElement,
 }) => [
   <ConfirmSection
-    isEnabled={tentativeElement !== null}
+    status={tentativeElement !== null ? 'enabled' : 'disabled'}
     onClick={onConfirmTentativeElement}
     label="Confirm"
   />,

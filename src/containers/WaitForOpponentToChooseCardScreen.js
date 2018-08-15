@@ -11,7 +11,7 @@ export default ({
   trumpCard,
 }) => [
   <ConfirmSection
-    isEnabled={false}
+    status="disabled"
     label="Continue"
   />,
   <TrumpSection

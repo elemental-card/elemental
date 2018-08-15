@@ -14,11 +14,12 @@ export default ({
   onBack,
 }) => [
   <ConfirmSection
-    isEnabled={areInitialsValid(tentativeInitials)}
+    status={areInitialsValid(tentativeInitials) ? 'enabled' : 'disabled'}
     onClick={onConfirmTentativeInitials}
     label="Confirm"
   />,
   <BackSection
+    status="enabled"
     onClick={onBack}
     label="Home"
   />,

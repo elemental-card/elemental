@@ -13,7 +13,7 @@ export default ({
   tentativeBid,
 }) => [
   <ConfirmSection
-    isEnabled={false}
+    status="disabled"
     label="Continue"
   />,
   <TrumpSection
