@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ConfirmSectionDemo from './ConfirmSectionDemo';
+import PendingSectionsDemo from './PendingSectionsDemo';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<ConfirmSectionDemo />, document.getElementById('root'));
+ReactDOM.render(<PendingSectionsDemo />, document.getElementById('root'));
 registerServiceWorker();
