@@ -181,7 +181,7 @@ const setPlayersPlayedCardToNull = (currState) => {
 const setNextDealer = (currState) => {
   return {
     ...currState,
-    nextDealer: currState.players[currState.players.length - 1].name,
+    nextDealer: currState.players[0].name,
   };
 };
 
