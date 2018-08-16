@@ -45,7 +45,10 @@ export default ({
       <BidTable players={players} tentativeBid={tentativeBid} />
     </Container>,
     <Container bottomCenter darkGrey>
-      <Hand cards={hand} trumpElement={trumpCard.element} />
+      <Hand
+        cards={hand}
+        trumpElement={trumpCard === null ? null : trumpCard.element}
+      />
     </Container>
   ];
 }
