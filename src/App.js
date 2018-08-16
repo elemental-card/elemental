@@ -349,7 +349,7 @@ export default class extends React.Component {
           .find(p => p.uid === oldAppState.uid);
         const oldSelf = oldRoomState.gameState.players
           .find(p => p.name === ownName);
-        const hand = oldSelf.hand.length <= 1
+        const hand = oldSelf.hand.length === 0
           ? []
           : newRoomState.gameState.players.find(p => p.name === ownName).hand;
         return {
