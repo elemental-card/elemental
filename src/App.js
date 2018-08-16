@@ -380,7 +380,7 @@ export default class extends React.Component {
       )
     ) {
       this.setState((prevState) => {
-        const scoreBreakdowns = oldRoomState.gameState.players.map((player) => {
+        const scoreBreakdowns = newRoomState.gameState.players.map((player) => {
           const currentScore = player.score;
           const oldScore = oldRoomState.gameState.players
             .find(p => p.name === player.name).score;
