@@ -23,6 +23,7 @@ const home = {
   uid: 'string',
   create() {},
   browse() {},
+  isPending: 'boolean',
 };
 
 const chooseLobbyToJoin = {

@@ -19,3 +19,63 @@
   left: 50vw;
   background-color: green;
 }
+
+.HomeScreen__PendingOverlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #444;
+  opacity: 0.5;
+}
+
+/* https://github.com/lukehaas/css-loaders */
+.HomeScreen__PendingIcon,
+.HomeScreen__PendingIcon:before,
+.HomeScreen__PendingIcon:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: homescreen-load 1.8s infinite ease-in-out;
+}
+
+.HomeScreen__PendingIcon {
+  color: #ffffff;
+  font-size: 3vh;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  animation-delay: -0.16s;
+}
+
+.HomeScreen__PendingIcon:before,
+.HomeScreen__PendingIcon:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+
+.HomeScreen__PendingIcon:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+
+.HomeScreen__PendingIcon:after {
+  left: 3.5em;
+}
+
+@keyframes homescreen-load {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em #888;
+  }
+
+  40% {
+    box-shadow: 0 2.5em 0 0 #ffffff;
+  }
+}

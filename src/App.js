@@ -63,6 +63,7 @@ export default class extends React.Component {
         appState: {
           type: 'HOME',
           uid,
+          isPending: false,
         },
       });
     });
@@ -110,6 +111,7 @@ export default class extends React.Component {
       case 'HOME':
         return (
           <HomeScreen
+            isPending={this.state.appState.isPending}
             onJoinClicked={this.onHomeJoin}
             onCreateClicked={this.onHomeCreate}
           />
@@ -284,7 +286,8 @@ export default class extends React.Component {
     this.setState((prevState) => ({
       appState: {
         type: 'HOME',
-        uid: prevState.appState.uid
+        uid: prevState.appState.uid,
+        isPending: false,
       },
     }));
   }
@@ -521,6 +524,7 @@ export default class extends React.Component {
   }
 
   onHomeJoin() {
+    this.indicatePendingSubmission();
     this.navigateToBrowseScreen();
   }
 
