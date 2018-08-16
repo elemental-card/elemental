@@ -30,8 +30,14 @@ const getOwnHandFromAppState = (appState) => {
 };
 
 const getDisplayCardOfTrump = (trump) => {
-  if (trump.type === 'zero' || trump.type === 'noCard') {
+  if (trump.type === 'noCard') {
     return null;
+  }
+  if (trump.type === 'zero') {
+    return {
+      rank: 0,
+      element: 'magic',
+    };
   }
   if (trump.type === 'card') {
     return trump.value;
