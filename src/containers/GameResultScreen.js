@@ -23,12 +23,18 @@ export default ({
     <List>
       {players.slice()
         .sort((a, b) => b.score - a.score)
-        .map((player, i) => (
-        <ListItem>
-          <PlacementIndicator place={i + 1} />
-          {player.name}: {player.score}
-        </ListItem>
-      ))}
+        .map((player, i, sortedPlayers) => {
+          let j = i;
+          while (j > 0 && sortedPlayers[j - 1].score === player.score) {
+            j--;
+          }
+          return (
+            <ListItem>
+              <PlacementIndicator place={j + 1} />
+              {player.name}: {player.score}
+            </ListItem>
+          );
+        })}
     </List>
   </Container>
 ];

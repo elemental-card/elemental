@@ -215,6 +215,39 @@ const SAMPLE_BIDDERS3 = [
   }
 ];
 
+const SAMPLE_BIDDERS4 = [
+  {
+    name: 'Bob',
+    score: 90,
+    bid: null,
+  },
+  {
+    name: 'KJL',
+    score: 90,
+    bid: null,
+  },
+  {
+    name: '9oe',
+    score: -10,
+    bid: null,
+  },
+  {
+    name: '137',
+    score: 40,
+    bid: null,
+  },
+  {
+    name: 'dav',
+    score: 90,
+    bid: null,
+  },
+  {
+    name: 'd4b',
+    score: 40,
+    bid: null,
+  }
+];
+
 const SAMPLE_DELTAS = [
   30,
   20,
@@ -366,7 +399,7 @@ export default class extends React.Component {
         />;
       case 'resultGame':
         return <GameResultScreen
-          players={SAMPLE_BIDDERS3}
+          players={SAMPLE_BIDDERS4}
           onContinue={() => alert('Finished game.')}
         />;
       default:
