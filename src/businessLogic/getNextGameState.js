@@ -1,4 +1,4 @@
-import { getWinnerIndex, getOrderedDeck } from './cardUtils';
+import { getWinnerIndex, getOrderedDeck, sortHand } from './cardUtils';
 import getElementOfTrump from './getElementOfTrump';
 import getShuffledArrayAndNewPrngState from './getShuffledArrayAndNewPrngState';
 
@@ -307,7 +307,9 @@ const setPlayersHandUsing = (deck, cardsPerPlayer) => (currState) => {
     players: currState.players.map((player, i) => {
       return {
         ...player,
-        hand: deck.slice(i * cardsPerPlayer, (i + 1) * cardsPerPlayer),
+        hand: sortHand(
+          deck.slice(i * cardsPerPlayer, (i + 1) * cardsPerPlayer)
+        ),
       }
     }),
   };
