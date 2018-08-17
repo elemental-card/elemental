@@ -266,11 +266,10 @@ export default class extends React.Component {
       case 'HAND_RESULT':
         return (
           <HandResultScreen
+            playerScoreBreakdowns={this.state.appState.scoreBreakdowns}
             trumpCard={
               getDisplayCardOfTrump(this.state.appState.trump)
             }
-            players={this.state.appState.scoreBreakdowns}
-            scoreDeltas={this.state.appState.scoreBreakdowns.map(b => b.delta)}
             onContinue={this.onHandContinue}
           />
         );

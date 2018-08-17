@@ -174,47 +174,6 @@ const SAMPLE_PLAYERS2 = [
   }
 ];
 
-const SAMPLE_BIDDERS3 = [
-  {
-    name: 'Bob',
-    bid: null,
-    score: 30,
-    hand: [
-      {
-        rank: 2,
-        element: 'earth',
-      },
-      {
-        rank: 11,
-        element: 'water',
-      },
-      {
-        rank: 6,
-        element: 'fire',
-      },
-      {
-        rank: 0,
-        element: 'magic',
-      }
-    ],
-  },
-  {
-    name: 'KJL',
-    score: 20,
-    bid: null,
-  },
-  {
-    name: '9oe',
-    score: 90,
-    bid: null,
-  },
-  {
-    name: 'd4b',
-    score: -10,
-    bid: null,
-  }
-];
-
 const SAMPLE_BIDDERS4 = [
   {
     name: 'Bob',
@@ -248,11 +207,27 @@ const SAMPLE_BIDDERS4 = [
   }
 ];
 
-const SAMPLE_DELTAS = [
-  30,
-  20,
-  -10,
-  90
+const SAMPLE_SCORE_BREAKDOWNS = [
+  {
+    name: 'Bob',
+    score: 30,
+    delta: 30,
+  },
+  {
+    name: 'KJL',
+    score: 20,
+    delta: 20,
+  },
+  {
+    name: '9oe',
+    score: 90,
+    delta: -10,
+  },
+  {
+    name: 'd4b',
+    score: -10,
+    delta: 90,
+  }
 ];
 
 export default class extends React.Component {
@@ -393,8 +368,7 @@ export default class extends React.Component {
             rank: 6,
             element: 'earth',
           }}
-          players={SAMPLE_BIDDERS3}
-          scoreDeltas={SAMPLE_DELTAS}
+          playerScoreBreakdowns={SAMPLE_SCORE_BREAKDOWNS}
           onContinue={() => alert('Continue.')}
         />;
       case 'resultGame':

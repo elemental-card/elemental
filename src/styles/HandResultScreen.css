@@ -1,0 +1,11 @@
+.HandResultScreen__ScoreBreakdown {
+  color: grey;
+}
+
+.HandResultScreen__ScoreDelta--negative {
+  color: #c00;
+}
+
+.HandResultScreen__ScoreDelta--positive {
+  color: green;
+}
