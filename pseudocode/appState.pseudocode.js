@@ -1,4 +1,4 @@
-const appStates = loginStandby
+const appState = loginStandby
   || home
   || chooseLobbyToJoin
   || chooseInitialsForCreating
@@ -21,9 +21,9 @@ const loginStandby = {};
 
 const home = {
   uid: 'string',
+  isPending: 'boolean',
   create() {},
   browse() {},
-  isPending: 'boolean',
 };
 
 const chooseLobbyToJoin = {
@@ -56,7 +56,7 @@ const chooseInitialsForJoining = {
 
 const startLobby = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
   status: 'starting' || 'leaving' || 'noPendingReqs',
   start() {},
   destroyLobby() {},
@@ -64,14 +64,14 @@ const startLobby = {
 
 const waitForHostToStart = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
   isPending: 'boolean',
   leave() {},
 };
 
 const chooseTrumpElement = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
   tentativeElement: option('string'),
   isPending: 'boolean',
   selectTentativeElement() {},
@@ -80,7 +80,7 @@ const chooseTrumpElement = {
 
 const waitForTrumpElementToBeChosen = {
   uid: 'string',
-  roomState: 'roomState',
+  roomState,
 };
 
 const trumpElementResult = {

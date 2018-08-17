@@ -1,4 +1,4 @@
-const roomStates = lobby
+const roomState = lobby
   || playing;
 
 const lobby = {
@@ -19,5 +19,5 @@ const playing = {
       name: 'string',
     }
   ],
-  gameState: 'gameState',
+  gameState,
 };

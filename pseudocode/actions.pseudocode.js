@@ -1,9 +1,9 @@
-const action = join // done
-  || leave // done
-  || hostStart // done
-  || chooseTrumpElement // done
-  || chooseBid // done
-  || chooseCard; // done
+const action = join
+  || leave
+  || hostStart
+  || chooseTrumpElement
+  || chooseBid
+  || chooseCard;
 
 const join = {
   author: 'string',
@@ -31,5 +31,5 @@ const chooseBid = {
 
 const chooseCard = {
   author: 'string',
-  card: 'number', // deserialize into object
+  card: 'number',
 };
