@@ -6,7 +6,7 @@ export const getCardCodeFromCard = (card) => {
     return 53;
   }
   return (
-    ((card.rank - 2) % 13)
+    ((card.rank - 1) % 13)
     + (13 * ['fire', 'water', 'earth', 'air'].indexOf(card.element))
   );
 };
@@ -25,7 +25,7 @@ export const getCardFromCardCode = (cardCode) => {
     };
   }
   return {
-    rank: (cardCode % 13) + 2,
+    rank: (cardCode % 13) + 1,
     element: ['fire', 'water', 'earth', 'air'][~~(cardCode / 13)],
   };
 };
@@ -72,7 +72,7 @@ export const getWinnerIndex = (playedCards, trumpElementOrNull) => {
 export const getOrderedDeck = () => {
   const deck = [];
   ['fire', 'water', 'earth', 'air'].forEach((element) => {
-    for (let rank = 2; rank <= 14; rank++) {
+    for (let rank = 1; rank <= 13; rank++) {
       deck.push({
         rank,
         element,

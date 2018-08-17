@@ -8,7 +8,7 @@ This repository contains the source code for our website
 ### Deck
 The game is played with 60 cards, each with a *rank* and an *element*:
 
-- 13 cards (ranked `2`-`14`) of each of the 4 non-magic elements (`Fire`, `Water`, `Earth`, and `Air`), totaling 52 cards in all
+- 13 cards (ranked `1`-`13`) of each of the 4 non-magic elements (`Fire`, `Water`, `Earth`, and `Air`), totaling 52 cards in all
 - 4 `0` cards, which have a rank of `0` and element of `Magic`
 - 4 `∞` cards, which have a rank of `∞` and element of `Magic`
 
