@@ -28,15 +28,15 @@ To begin the game, choose a dealer and then begin Round 1.
 At the beginning of each round, the dealer deals *n* cards to each player where *n* is the round number (for example, on Round 1, each player would be dealt 1 card).
 
 #### Determining trump
-The dealer then flips the top card of the deck face-up. This card will determine the *trump suit*:
+The dealer then flips the top card of the deck face-up. This card will determine the *trump element*:
 
-If a `0` is flipped, then there is no trump suit.
+If a `0` is flipped, then there is no trump element.
 
-If an `∞` is flipped, then the dealer must immediately pick a suit to be trump (they cannot choose no trump).
+If an `∞` is flipped, then the dealer must immediately pick a element to be trump (they cannot choose no trump).
 
-Otherwise, the trump suit is the suit of the flipped card.
+Otherwise, the trump element is the element of the flipped card.
 
-On the final round of the game, the entire deck will be dealt, so there will be no top card to flip. Because of this, the final round must be played with no trump suit.
+On the final round of the game, the entire deck will be dealt, so there will be no top card to flip. Because of this, the final round must be played with no trump element.
 
 #### Bidding
 Then, starting with the player left of the dealer, each player makes a *bid*, which is a prediction of how many *tricks* they will win.
@@ -47,11 +47,11 @@ After each player has made their bid, the player left of the dealer leads the fi
 
 #### Tricks
 ##### Leading
-The first person in each trick may play any card in their hand. This card will determine the *lead suit* of the trick.
+The first person in each trick may play any card in their hand. This card will determine the *lead element* of the trick.
 
-If they play a `0`, the next player may play any card in their hand, and that card will determine the lead suit.
+If they play a `0`, the next player may play any card in their hand, and that card will determine the lead element.
 
-If they play an `∞`, then there is no lead suit for this trick, meaning every player can play any card in their hand.
+If they play an `∞`, then there is no lead element for this trick, meaning every player can play any card in their hand.
 
 Otherwise, the lead element is the element of the card played.
 ##### Following
