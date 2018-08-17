@@ -80,3 +80,6 @@ where *n* is their bid.
 Each player who won either too many or too few tricks loses 10*n* points where *n* is the absolute value of the difference between their bid and the number of tricks they won.
 
 The next round is then begun, with the player left of the dealer as the new dealer.
+
+## License
+MIT
