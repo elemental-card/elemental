@@ -1,6 +1,4 @@
-import React from 'react';
-import '../styles/LoadingSpinner.css';
+import React from "react";
+import "../styles/LoadingSpinner.css";
 
-export default () => (
-  <div className="LoadingSpinner" />
-);
+export default () => <div className="LoadingSpinner" />;

@@ -1,19 +1,19 @@
-import React from 'react';
-import LobbyBrowsingScreen from '../containers/LobbyBrowsingScreen';
+import React from "react";
+import LobbyBrowsingScreen from "../containers/LobbyBrowsingScreen";
 
 const hostsOfLobbies = [
   {
-    name: 'Bob',
-    uid: '123',
+    name: "Bob",
+    uid: "123",
   },
   {
-    name: '_X_',
-    uid: '697',
+    name: "_X_",
+    uid: "697",
   },
   {
-    name: 'j0e',
-    uid: '999',
-  }
+    name: "j0e",
+    uid: "999",
+  },
 ];
 
 export default class extends React.Component {
@@ -30,10 +30,14 @@ export default class extends React.Component {
       <LobbyBrowsingScreen
         hostsOfLobbies={hostsOfLobbies}
         tentativePlayer={this.state.tentativePlayer}
-        onSelectTentativePlayer={(tentativePlayer) => this.setState({ tentativePlayer })}
-        onConfirmTentativePlayer={() => alert('Confirmed ' + this.state.tentativePlayer.name)}
-        onBack={() => alert('Back.')}
+        onSelectTentativePlayer={tentativePlayer =>
+          this.setState({ tentativePlayer })
+        }
+        onConfirmTentativePlayer={() =>
+          alert("Confirmed " + this.state.tentativePlayer.name)
+        }
+        onBack={() => alert("Back.")}
       />
     );
   }
-};
+}

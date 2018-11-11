@@ -1,5 +1,5 @@
-import getShuffledArrayAndNewPrngState from './getShuffledArrayAndNewPrngState';
-import { getOrderedDeck } from './cardUtils';
+import getShuffledArrayAndNewPrngState from "./getShuffledArrayAndNewPrngState";
+import { getOrderedDeck } from "./cardUtils";
 
 export default (prngState0, playerNames) => {
   const {
@@ -23,7 +23,7 @@ export default (prngState0, playerNames) => {
 
   if (trumpCard.rank === Infinity) {
     return {
-      type: 'CHOOSING_TRUMP',
+      type: "CHOOSING_TRUMP",
       prngState: prngState2,
       players: shuffledPlayerNames.map((playerName, i) => {
         return {
@@ -35,18 +35,19 @@ export default (prngState0, playerNames) => {
     };
   }
 
-  const trump = trumpCard.rank === 0
-    ? {
-      type: 'zero',
-      value: null,
-    }
-    : {
-      type: 'card',
-      value: trumpCard,
-    };
+  const trump =
+    trumpCard.rank === 0
+      ? {
+          type: "zero",
+          value: null,
+        }
+      : {
+          type: "card",
+          value: trumpCard,
+        };
 
   return {
-    type: 'BIDDING',
+    type: "BIDDING",
     prngState: prngState2,
     trump,
     players: shuffledPlayerNames.map((playerName, i) => {

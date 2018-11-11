@@ -1,11 +1,8 @@
-import React from 'react';
-import '../styles/List.css';
+import React from "react";
+import "../styles/List.css";
 
-const getClassName = (isSelected) => {
-  return 'List__Item' + (isSelected
-    ? ' List__Item--selected'
-    : ''
-  );
+const getClassName = isSelected => {
+  return "List__Item" + (isSelected ? " List__Item--selected" : "");
 };
 
 export default ({ children, onClick, isSelected }) => (

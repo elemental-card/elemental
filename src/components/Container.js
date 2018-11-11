@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/Container.css';
+import React from "react";
+import "../styles/Container.css";
 
 // const getClassName = (options) => {
 //   return Object.entries(options)
@@ -9,20 +9,15 @@ import '../styles/Container.css';
 //     ).slice(1);
 // };
 
-const getClassName = (options) => (
-  'Container ' +
+const getClassName = options =>
+  "Container " +
   Object.entries(options)
     .filter(([k, v]) => v)
-    .map(([k, v]) => 'Container--' + k)
-    .join(' ')
-);
+    .map(([k, v]) => "Container--" + k)
+    .join(" ");
 
 export default ({
   children,
 
   ...options
-}) => (
-  <div className={getClassName(options)}>
-    {children}
-  </div>
-);
+}) => <div className={getClassName(options)}>{children}</div>;

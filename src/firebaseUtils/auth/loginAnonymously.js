@@ -1,10 +1,10 @@
-import firebase from '../firebase';
+import firebase from "../firebase";
 
 export default () => {
   firebase.auth().signInAnonymously();
 
-  return new Promise((resolve) => {
-    firebase.auth().onAuthStateChanged((user) => {
+  return new Promise(resolve => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         resolve(user.uid);
       }

@@ -1,28 +1,50 @@
-import { getWinnerIndex, getOrderedDeck, sortHand } from './cardUtils';
-import getElementOfTrump from './getElementOfTrump';
-import getShuffledArrayAndNewPrngState from './getShuffledArrayAndNewPrngState';
+import { getWinnerIndex, getOrderedDeck, sortHand } from "./cardUtils";
+import getElementOfTrump from "./getElementOfTrump";
+import getShuffledArrayAndNewPrngState from "./getShuffledArrayAndNewPrngState";
 
 export default (currState, choice) => {
-  if (currState.type === 'CHOOSING_TRUMP') {
-    return pipeHelper(currState, setTrumpTo(choice), setPlayersBidsToNull, setStateTypeToBidding);
+  if (currState.type === "CHOOSING_TRUMP") {
+    return pipeHelper(
+      currState,
+      setTrumpTo(choice),
+      setPlayersBidsToNull,
+      setStateTypeToBidding,
+    );
   }
-  if (currState.type === 'BIDDING') {
+  if (currState.type === "BIDDING") {
     currState = pipeHelper(currState, setPlayerBidTo(choice));
     const numberOfPlayers = currState.players.length;
     const playersThatBid = currState.players.filter(p => p.bid !== null).length;
     if (playersThatBid < numberOfPlayers) {
       return currState;
     }
-    return pipeHelper(currState, setPlayersTricksWonToZero, setPlayersPlayedCardToNull, setNextDealer, setStateTypeToChoosingCard);
+    return pipeHelper(
+      currState,
+      setPlayersTricksWonToZero,
+      setPlayersPlayedCardToNull,
+      setNextDealer,
+      setStateTypeToChoosingCard,
+    );
   }
-  if (currState.type === 'CHOOSING_CARD') {
-    currState = pipeHelper(currState, removeCardFromPlayerHand(choice), setPlayerPlayedCardTo(choice));
+  if (currState.type === "CHOOSING_CARD") {
+    currState = pipeHelper(
+      currState,
+      removeCardFromPlayerHand(choice),
+      setPlayerPlayedCardTo(choice),
+    );
     const numberOfPlayers = currState.players.length;
-    const numberOfPlayersThatPlayedACard = currState.players.filter(p => p.playedCard !== null).length;
+    const numberOfPlayersThatPlayedACard = currState.players.filter(
+      p => p.playedCard !== null,
+    ).length;
     if (numberOfPlayersThatPlayedACard < numberOfPlayers) {
       return currState;
     }
-    currState = pipeHelper(currState, makeWinnerLeader, incrementWinnerTricksWon, setPlayersPlayedCardToNull);
+    currState = pipeHelper(
+      currState,
+      makeWinnerLeader,
+      incrementWinnerTricksWon,
+      setPlayersPlayedCardToNull,
+    );
     const doPlayersHaveCardsLeftToPlay = currState.players[0].hand.length > 0;
     if (doPlayersHaveCardsLeftToPlay) {
       return currState;
@@ -34,29 +56,49 @@ export default (currState, choice) => {
       array: getOrderedDeck(),
       prngState: currState.prngState,
     });
-    const roundNumber = currState.players.map(p => p.tricksWon).reduce((a, b) => a + b);
+    const roundNumber = currState.players
+      .map(p => p.tricksWon)
+      .reduce((a, b) => a + b);
     const finalRoundNumber = 60 / numberOfPlayers;
     if (roundNumber === finalRoundNumber) {
-      return pipeHelper(currState, updateScores, orderByScoreThenSetStateTypeToFinal);
+      return pipeHelper(
+        currState,
+        updateScores,
+        orderByScoreThenSetStateTypeToFinal,
+      );
     }
     const nextRoundNumber = roundNumber + 1;
     const cardsPerPlayer = nextRoundNumber;
     const numberOfCardsToBeDealtNextRound = cardsPerPlayer * numberOfPlayers;
-    const trumpCard = nextRoundNumber === finalRoundNumber
-      ? null
-      : deck[numberOfCardsToBeDealtNextRound];
+    const trumpCard =
+      nextRoundNumber === finalRoundNumber
+        ? null
+        : deck[numberOfCardsToBeDealtNextRound];
     currState = {
       ...currState,
       prngState: newPrngState,
     };
-    currState = pipeHelper(currState, updateScores, updateDealer, setPlayersHandUsing(deck, cardsPerPlayer), removePlayersBidsTricksWonAndPlayedCards);
+    currState = pipeHelper(
+      currState,
+      updateScores,
+      updateDealer,
+      setPlayersHandUsing(deck, cardsPerPlayer),
+      removePlayersBidsTricksWonAndPlayedCards,
+    );
     const doesDealerNeedToChooseTrump = trumpCard.rank === Infinity;
     if (doesDealerNeedToChooseTrump) {
       return pipeHelper(currState, setStateTypeToChoosingTrump);
     }
-    return pipeHelper(currState, setTrumpTo(trumpCard), setPlayersBidsToNull, setStateTypeToBidding);
+    return pipeHelper(
+      currState,
+      setTrumpTo(trumpCard),
+      setPlayersBidsToNull,
+      setStateTypeToBidding,
+    );
   }
-  throw new TypeError('Cannot get nextGameState for state type ' + currState.type);
+  throw new TypeError(
+    "Cannot get nextGameState for state type " + currState.type,
+  );
 };
 
 // Since create-react-app doesn't enable pipeline syntax,
@@ -74,23 +116,23 @@ const pipeHelper = (...args) => {
   return result;
 };
 
-const setTrumpTo = (cardOrElementOrNull) => (currState) => {
+const setTrumpTo = cardOrElementOrNull => currState => {
   if (cardOrElementOrNull === null) {
     return {
       ...currState,
       trump: {
-        type: 'noCard',
+        type: "noCard",
         value: null,
       },
     };
   }
-  if ('object' === typeof cardOrElementOrNull) {
+  if ("object" === typeof cardOrElementOrNull) {
     const card = cardOrElementOrNull;
     if (card.rank === 0) {
       return {
         ...currState,
         trump: {
-          type: 'zero',
+          type: "zero",
           value: null,
         },
       };
@@ -98,51 +140,51 @@ const setTrumpTo = (cardOrElementOrNull) => (currState) => {
     return {
       ...currState,
       trump: {
-        type: 'card',
+        type: "card",
         value: card,
       },
     };
   }
-  if ('string' === typeof cardOrElementOrNull) {
+  if ("string" === typeof cardOrElementOrNull) {
     const element = cardOrElementOrNull;
     return {
       ...currState,
       trump: {
-        type: 'dealerChoice',
+        type: "dealerChoice",
         value: element,
       },
     };
   }
-  throw new TypeError('Illegal cardOrSuit.');
+  throw new TypeError("Illegal cardOrSuit.");
 };
 
-const setPlayersBidsToNull = (currState) => {
+const setPlayersBidsToNull = currState => {
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       return {
         ...player,
         bid: null,
-      }
+      };
     }),
   };
 };
 
-const setStateTypeToBidding = (currState) => {
+const setStateTypeToBidding = currState => {
   return {
     ...currState,
-    type: 'BIDDING',
+    type: "BIDDING",
   };
 };
 
-const setPlayerBidTo = (bid) => (currState) => {
+const setPlayerBidTo = bid => currState => {
   const activePlayer = currState.players.find(p => p.bid === null);
   if (activePlayer === undefined) {
-    throw new Error('All players have bid.');
+    throw new Error("All players have bid.");
   }
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       if (player.name === activePlayer.name) {
         return {
           ...player,
@@ -154,60 +196,64 @@ const setPlayerBidTo = (bid) => (currState) => {
   };
 };
 
-const setPlayersTricksWonToZero = (currState) => {
+const setPlayersTricksWonToZero = currState => {
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       return {
         ...player,
         tricksWon: 0,
-      }
+      };
     }),
   };
 };
 
-const setPlayersPlayedCardToNull = (currState) => {
+const setPlayersPlayedCardToNull = currState => {
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       return {
         ...player,
         playedCard: null,
-      }
+      };
     }),
   };
 };
 
-const setNextDealer = (currState) => {
+const setNextDealer = currState => {
   return {
     ...currState,
     nextDealer: currState.players[0].name,
   };
 };
 
-const setStateTypeToChoosingCard = (currState) => {
+const setStateTypeToChoosingCard = currState => {
   return {
     ...currState,
-    type: 'CHOOSING_CARD',
+    type: "CHOOSING_CARD",
   };
 };
 
-const removeCardFromPlayerHand = (card) => (currState) => {
+const removeCardFromPlayerHand = card => currState => {
   const activePlayer = currState.players.find(p => p.playedCard === null);
   if (activePlayer === undefined) {
-    throw new Error('All players have played a card.');
+    throw new Error("All players have played a card.");
   }
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       if (player.name === activePlayer.name) {
-        const indexOfCard = player.hand.findIndex(c => c.rank === card.rank && c.element === card.element);
+        const indexOfCard = player.hand.findIndex(
+          c => c.rank === card.rank && c.element === card.element,
+        );
         if (indexOfCard === -1) {
-          throw new Error('Card is not in player\'s hand.');
+          throw new Error("Card is not in player's hand.");
         }
         return {
           ...player,
-          hand: player.hand.slice(0, indexOfCard).concat(player.hand.slice(indexOfCard + 1)),
+          hand: player.hand
+            .slice(0, indexOfCard)
+            .concat(player.hand.slice(indexOfCard + 1)),
         };
       }
       return player;
@@ -215,14 +261,14 @@ const removeCardFromPlayerHand = (card) => (currState) => {
   };
 };
 
-const setPlayerPlayedCardTo = (card) => (currState) => {
+const setPlayerPlayedCardTo = card => currState => {
   const activePlayer = currState.players.find(p => p.playedCard === null);
   if (activePlayer === undefined) {
-    throw new Error('All players have played a card.');
+    throw new Error("All players have played a card.");
   }
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       if (player.name === activePlayer.name) {
         return {
           ...player,
@@ -234,18 +280,26 @@ const setPlayerPlayedCardTo = (card) => (currState) => {
   };
 };
 
-const makeWinnerLeader = (currState) => {
+const makeWinnerLeader = currState => {
   const playedCards = currState.players.map(p => p.playedCard);
-  const winnerIndex = getWinnerIndex(playedCards, getElementOfTrump(currState.trump));
+  const winnerIndex = getWinnerIndex(
+    playedCards,
+    getElementOfTrump(currState.trump),
+  );
   return {
     ...currState,
-    players: currState.players.slice(winnerIndex).concat(currState.players.slice(0, winnerIndex)),
+    players: currState.players
+      .slice(winnerIndex)
+      .concat(currState.players.slice(0, winnerIndex)),
   };
 };
 
-const incrementWinnerTricksWon = (currState) => {
+const incrementWinnerTricksWon = currState => {
   const playedCards = currState.players.map(p => p.playedCard);
-  const winnerIndex = getWinnerIndex(playedCards, getElementOfTrump(currState.trump));
+  const winnerIndex = getWinnerIndex(
+    playedCards,
+    getElementOfTrump(currState.trump),
+  );
   return {
     ...currState,
     players: currState.players.map((player, i) => {
@@ -260,14 +314,12 @@ const incrementWinnerTricksWon = (currState) => {
   };
 };
 
-const updateScores = (currState) => {
+const updateScores = currState => {
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       const trickDiff = Math.abs(player.tricksWon - player.bid);
-      const points = trickDiff === 0
-        ? 20 + (player.bid * 10)
-        : trickDiff * -10;
+      const points = trickDiff === 0 ? 20 + player.bid * 10 : trickDiff * -10;
       return {
         ...player,
         score: player.score + points,
@@ -276,49 +328,56 @@ const updateScores = (currState) => {
   };
 };
 
-const orderByScoreThenSetStateTypeToFinal = (currState) => {
+const orderByScoreThenSetStateTypeToFinal = currState => {
   return {
     ...currState,
-    type: 'FINAL',
-    players: currState.players.map((player) => {
-      return {
-        name: player.name,
-        score: player.score,
-      };
-    }).sort((a, b) => b.score - a.score),
+    type: "FINAL",
+    players: currState.players
+      .map(player => {
+        return {
+          name: player.name,
+          score: player.score,
+        };
+      })
+      .sort((a, b) => b.score - a.score),
   };
 };
 
-const updateDealer = (currState) => {
+const updateDealer = currState => {
   const newDealerName = currState.nextDealer;
-  const indexOfNewDealer = currState.players.findIndex(p => p.name === newDealerName);
-  const indexOfNewLeader = indexOfNewDealer + 1 === currState.players.length
-    ? 0
-    : indexOfNewDealer + 1;
+  const indexOfNewDealer = currState.players.findIndex(
+    p => p.name === newDealerName,
+  );
+  const indexOfNewLeader =
+    indexOfNewDealer + 1 === currState.players.length
+      ? 0
+      : indexOfNewDealer + 1;
   return {
     ...currState,
-    players: currState.players.slice(indexOfNewLeader).concat(currState.players.slice(0, indexOfNewLeader)),
+    players: currState.players
+      .slice(indexOfNewLeader)
+      .concat(currState.players.slice(0, indexOfNewLeader)),
   };
 };
 
-const setPlayersHandUsing = (deck, cardsPerPlayer) => (currState) => {
+const setPlayersHandUsing = (deck, cardsPerPlayer) => currState => {
   return {
     ...currState,
     players: currState.players.map((player, i) => {
       return {
         ...player,
         hand: sortHand(
-          deck.slice(i * cardsPerPlayer, (i + 1) * cardsPerPlayer)
+          deck.slice(i * cardsPerPlayer, (i + 1) * cardsPerPlayer),
         ),
-      }
+      };
     }),
   };
 };
 
-const removePlayersBidsTricksWonAndPlayedCards = (currState) => {
+const removePlayersBidsTricksWonAndPlayedCards = currState => {
   return {
     ...currState,
-    players: currState.players.map((player) => {
+    players: currState.players.map(player => {
       return {
         name: player.name,
         score: player.score,
@@ -328,9 +387,9 @@ const removePlayersBidsTricksWonAndPlayedCards = (currState) => {
   };
 };
 
-const setStateTypeToChoosingTrump = (currState) => {
+const setStateTypeToChoosingTrump = currState => {
   return {
     ...currState,
-    type: 'CHOOSING_TRUMP',
+    type: "CHOOSING_TRUMP",
   };
 };

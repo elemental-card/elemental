@@ -1,20 +1,18 @@
-import React from 'react';
-import '../styles/PlacementIndicator.css';
+import React from "react";
+import "../styles/PlacementIndicator.css";
 
-const getClassName = (place) => {
+const getClassName = place => {
   if (place === 1) {
-    return 'PlacementIndicator PlacementIndicator--gold';
+    return "PlacementIndicator PlacementIndicator--gold";
   } else if (place === 2) {
-    return 'PlacementIndicator PlacementIndicator--silver';
+    return "PlacementIndicator PlacementIndicator--silver";
   } else if (place === 3) {
-    return 'PlacementIndicator PlacementIndicator--bronze';
+    return "PlacementIndicator PlacementIndicator--bronze";
   } else {
-    return 'PlacementIndicator';
+    return "PlacementIndicator";
   }
 };
 
 export default ({ place }) => (
-  <div className={getClassName(place)}>
-    {place}
-  </div>
+  <div className={getClassName(place)}>{place}</div>
 );

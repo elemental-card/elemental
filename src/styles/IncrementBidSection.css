@@ -37,19 +37,19 @@
 }
 
 .IncrementBidSection__Button__Plus::before {
-    content: "";
-    position: absolute;
-    width:3vh;
-    height:15vh;
-    background-color:#ccc;
-    top: -6vh;
-    left: 6vh;
+  content: "";
+  position: absolute;
+  width: 3vh;
+  height: 15vh;
+  background-color: #ccc;
+  top: -6vh;
+  left: 6vh;
 }
 
 .IncrementBidSection__Button__Plus::after {
-    content: "";
-    position: absolute;
-    width: 15vh;
-    height: 3vh;
-    background-color:#ccc;
+  content: "";
+  position: absolute;
+  width: 15vh;
+  height: 3vh;
+  background-color: #ccc;
 }

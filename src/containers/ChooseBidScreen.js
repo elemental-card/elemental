@@ -1,12 +1,12 @@
-import React from 'react';
-import IncrementBidSection from '../components/IncrementBidSection';
-import DecrementBidSection from '../components/DecrementBidSection';
-import ConfirmSection from '../components/ConfirmSection';
-import TrumpSection from '../components/TrumpSection';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import BidTable from '../components/BidTable';
-import Hand from '../components/Hand';
+import React from "react";
+import IncrementBidSection from "../components/IncrementBidSection";
+import DecrementBidSection from "../components/DecrementBidSection";
+import ConfirmSection from "../components/ConfirmSection";
+import TrumpSection from "../components/TrumpSection";
+import Container from "../components/Container";
+import Header from "../components/Header";
+import BidTable from "../components/BidTable";
+import Hand from "../components/Hand";
 
 export default ({
   hand,
@@ -33,13 +33,11 @@ export default ({
     <IncrementBidSection onClick={safelyIncrementBid} />,
     <DecrementBidSection onClick={safelyDecrementBid} />,
     <ConfirmSection
-      status={isPending ? 'pending' : 'enabled'}
+      status={isPending ? "pending" : "enabled"}
       onClick={onConfirmTentativeBid}
       label="Confirm"
     />,
-    <TrumpSection
-      card={trumpCard}
-    />,
+    <TrumpSection card={trumpCard} />,
     <Container topCenter lightGrey>
       <Header>Make your bid:</Header>
       <BidTable players={players} tentativeBid={tentativeBid} />
@@ -49,6 +47,6 @@ export default ({
         cards={hand}
         trumpElement={trumpCard === null ? null : trumpCard.element}
       />
-    </Container>
+    </Container>,
   ];
-}
+};

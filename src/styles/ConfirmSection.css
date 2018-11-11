@@ -59,31 +59,31 @@
 }
 
 .ConfirmSection__Icon--disabled::before {
-    content: "";
-    position: absolute;
-    width:3vh;
-    height:15vh;
-    background-color:#444;
-    top: -12vh;
-    left: 5vh;
+  content: "";
+  position: absolute;
+  width: 3vh;
+  height: 15vh;
+  background-color: #444;
+  top: -12vh;
+  left: 5vh;
 }
 
 .ConfirmSection__Icon--enabled::before {
   content: "";
   position: absolute;
-  width:3vh;
-  height:15vh;
-  background-color:#ccc;
+  width: 3vh;
+  height: 15vh;
+  background-color: #ccc;
   top: -12vh;
   left: 5vh;
 }
 
 .ConfirmSection__Icon--disabled::after {
-    content: "";
-    position: absolute;
-    width: 5vh;
-    height: 3vh;
-    background-color:#444;
+  content: "";
+  position: absolute;
+  width: 5vh;
+  height: 3vh;
+  background-color: #444;
 }
 
 .ConfirmSection__Icon--enabled::after {
@@ -91,7 +91,7 @@
   position: absolute;
   width: 5vh;
   height: 3vh;
-  background-color:#ccc;
+  background-color: #ccc;
 }
 
 /* https://github.com/lukehaas/css-loaders */
@@ -116,7 +116,7 @@
 
 .ConfirmSection__Icon--pending:before,
 .ConfirmSection__Icon--pending:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
 }

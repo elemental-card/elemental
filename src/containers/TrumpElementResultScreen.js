@@ -1,9 +1,9 @@
-import React from 'react';
-import ConfirmSection from '../components/ConfirmSection';
-import TrumpSection from '../components/TrumpSection';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import Hand from '../components/Hand';
+import React from "react";
+import ConfirmSection from "../components/ConfirmSection";
+import TrumpSection from "../components/TrumpSection";
+import Container from "../components/Container";
+import Header from "../components/Header";
+import Hand from "../components/Hand";
 
 export default ({
   hand,
@@ -11,11 +11,7 @@ export default ({
 
   onContinue,
 }) => [
-  <ConfirmSection
-    status="enabled"
-    onClick={onContinue}
-    label="Continue"
-  />,
+  <ConfirmSection status="enabled" onClick={onContinue} label="Continue" />,
   <TrumpSection
     card={{
       rank: Infinity,
@@ -27,5 +23,5 @@ export default ({
   </Container>,
   <Container bottomLeft darkGrey>
     <Hand cards={hand} trumpElement={trumpElement} />
-  </Container>
+  </Container>,
 ];

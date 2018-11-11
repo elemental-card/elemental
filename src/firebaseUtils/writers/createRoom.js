@@ -1,9 +1,9 @@
-import firebase from '../firebase';
+import firebase from "../firebase";
 
 const db = firebase.firestore();
 
 export default async (hostUid, hostName) => {
-  const roomRef = db.collection('rooms').doc(hostUid);
+  const roomRef = db.collection("rooms").doc(hostUid);
   try {
     await roomRef.set({
       hostName,

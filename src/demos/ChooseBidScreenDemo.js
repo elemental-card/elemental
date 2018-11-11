@@ -1,56 +1,56 @@
-import React from 'react';
-import ChooseBidScreen from '../containers/ChooseBidScreen';
+import React from "react";
+import ChooseBidScreen from "../containers/ChooseBidScreen";
 
 const SAMPLE_HAND = [
   {
     rank: 2,
-    element: 'earth',
+    element: "earth",
   },
   {
     rank: 11,
-    element: 'water',
+    element: "water",
   },
   {
     rank: 6,
-    element: 'fire',
+    element: "fire",
   },
   {
     rank: 0,
-    element: 'magic',
-  }
+    element: "magic",
+  },
 ];
 
 const SAMPLE_BIDDERS = [
   {
-    name: 'Bob',
+    name: "Bob",
     bid: 1,
     hand: [
       {
         rank: 2,
-        element: 'earth',
+        element: "earth",
       },
       {
         rank: 11,
-        element: 'water',
+        element: "water",
       },
       {
         rank: 6,
-        element: 'fire',
+        element: "fire",
       },
       {
         rank: 0,
-        element: 'magic',
-      }
+        element: "magic",
+      },
     ],
   },
   {
-    name: 'KJL',
+    name: "KJL",
     bid: null,
   },
   {
-    name: '9oe',
+    name: "9oe",
     bid: null,
-  }
+  },
 ];
 
 export default class extends React.Component {
@@ -68,13 +68,15 @@ export default class extends React.Component {
         hand={SAMPLE_HAND}
         trumpCard={{
           rank: 6,
-          element: 'earth',
+          element: "earth",
         }}
         players={SAMPLE_BIDDERS}
         tentativeBid={this.state.tentativeBid}
-        onSelectTentativeBid={(tentativeBid) => this.setState({ tentativeBid })}
-        onConfirmTentativeBid={() => alert('Confirmed ' + this.state.tentativeBid)}
+        onSelectTentativeBid={tentativeBid => this.setState({ tentativeBid })}
+        onConfirmTentativeBid={() =>
+          alert("Confirmed " + this.state.tentativeBid)
+        }
       />
     );
   }
-};
+}

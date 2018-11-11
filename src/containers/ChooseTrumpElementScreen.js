@@ -1,10 +1,10 @@
-import React from 'react';
-import ConfirmSection from '../components/ConfirmSection';
-import TrumpSection from '../components/TrumpSection';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import TrumpElementOptions from '../components/TrumpElementOptions';
-import Hand from '../components/Hand';
+import React from "react";
+import ConfirmSection from "../components/ConfirmSection";
+import TrumpSection from "../components/TrumpSection";
+import Container from "../components/Container";
+import Header from "../components/Header";
+import TrumpElementOptions from "../components/TrumpElementOptions";
+import Hand from "../components/Hand";
 
 export default ({
   hand,
@@ -16,9 +16,7 @@ export default ({
 }) => [
   <ConfirmSection
     status={
-      isPending
-        ? 'pending'
-        : tentativeElement !== null ? 'enabled' : 'disabled'
+      isPending ? "pending" : tentativeElement !== null ? "enabled" : "disabled"
     }
     onClick={onConfirmTentativeElement}
     label="Confirm"
@@ -26,7 +24,7 @@ export default ({
   <TrumpSection
     card={{
       rank: Infinity,
-      element: tentativeElement || 'magic',
+      element: tentativeElement || "magic",
     }}
   />,
   <Container topLeft lightGrey>
@@ -38,5 +36,5 @@ export default ({
   </Container>,
   <Container bottomLeft darkGrey>
     <Hand cards={hand} trumpElement={tentativeElement} />
-  </Container>
+  </Container>,
 ];

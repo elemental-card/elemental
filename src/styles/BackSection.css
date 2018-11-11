@@ -59,21 +59,21 @@
 }
 
 .BackSection__Icon--enabled::before {
-    content: "";
-    position: absolute;
-    width:3vh;
-    height:15vh;
-    background-color:#ccc;
-    top: -6vh;
-    left: 6vh;
+  content: "";
+  position: absolute;
+  width: 3vh;
+  height: 15vh;
+  background-color: #ccc;
+  top: -6vh;
+  left: 6vh;
 }
 
 .BackSection__Icon--enabled::after {
-    content: "";
-    position: absolute;
-    width: 15vh;
-    height: 3vh;
-    background-color:#ccc;
+  content: "";
+  position: absolute;
+  width: 15vh;
+  height: 3vh;
+  background-color: #ccc;
 }
 
 /* https://github.com/lukehaas/css-loaders */
@@ -98,7 +98,7 @@
 
 .BackSection__Icon--pending:before,
 .BackSection__Icon--pending:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
 }

@@ -1,10 +1,10 @@
-import React from 'react';
-import WaitingSection from '../components/WaitingSection';
-import BackSection from '../components/BackSection';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
+import React from "react";
+import WaitingSection from "../components/WaitingSection";
+import BackSection from "../components/BackSection";
+import Container from "../components/Container";
+import Header from "../components/Header";
+import List from "../components/List";
+import ListItem from "../components/ListItem";
 
 export default ({
   players,
@@ -12,18 +12,18 @@ export default ({
 
   onLeave,
 }) => [
-  <WaitingSection label="Waiting for host to start game..."/>,
+  <WaitingSection label="Waiting for host to start game..." />,
   <BackSection
-    status={isPending ? 'pending' : 'enabled'}
+    status={isPending ? "pending" : "enabled"}
     onClick={onLeave}
     label="Leave"
   />,
   <Container left lightGrey>
     <Header>Players:</Header>
     <List>
-      {players.map((player) => (
+      {players.map(player => (
         <ListItem>{player.name}</ListItem>
       ))}
     </List>
-  </Container>
+  </Container>,
 ];

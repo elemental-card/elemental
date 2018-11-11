@@ -1,7 +1,7 @@
-import React from 'react';
-import Card from './Card';
-import { canCardBePlayed } from '../businessLogic/cardUtils';
-import '../styles/Hand.css';
+import React from "react";
+import Card from "./Card";
+import { canCardBePlayed } from "../businessLogic/cardUtils";
+import "../styles/Hand.css";
 
 const NOOP = () => undefined;
 

@@ -1,23 +1,23 @@
-import React from 'react';
-import ChooseTrumpElementScreen from '../containers/ChooseTrumpElementScreen';
+import React from "react";
+import ChooseTrumpElementScreen from "../containers/ChooseTrumpElementScreen";
 
 const SAMPLE_HAND = [
   {
     rank: 2,
-    element: 'earth',
+    element: "earth",
   },
   {
     rank: 11,
-    element: 'water',
+    element: "water",
   },
   {
     rank: 6,
-    element: 'fire',
+    element: "fire",
   },
   {
     rank: 0,
-    element: 'magic',
-  }
+    element: "magic",
+  },
 ];
 
 export default class extends React.Component {
@@ -34,9 +34,13 @@ export default class extends React.Component {
       <ChooseTrumpElementScreen
         hand={SAMPLE_HAND}
         tentativeElement={this.state.tentativeElement}
-        onSelectTentativeElement={(tentativeElement) => this.setState({ tentativeElement })}
-        onConfirmTentativeElement={() => alert('Confirmed ' + this.state.tentativeElement)}
+        onSelectTentativeElement={tentativeElement =>
+          this.setState({ tentativeElement })
+        }
+        onConfirmTentativeElement={() =>
+          alert("Confirmed " + this.state.tentativeElement)
+        }
       />
     );
   }
-};
+}

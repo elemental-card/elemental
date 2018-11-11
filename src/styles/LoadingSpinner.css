@@ -21,7 +21,7 @@
 
 .LoadingSpinner:before,
 .LoadingSpinner:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
 }

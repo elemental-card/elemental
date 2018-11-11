@@ -1,8 +1,8 @@
-import appendAction from './appendAction';
+import appendAction from "./appendAction";
 
 export default async (hostUid, authorUid) => {
   await appendAction(hostUid, {
-    type: 'LEAVE',
+    type: "LEAVE",
     author: authorUid,
   });
 };

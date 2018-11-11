@@ -1,90 +1,90 @@
 const waitingForOpponentToChooseCardGameState = {
   prngState: [1, 2, 3, 4],
   trump: {
-    type: 'card',
+    type: "card",
     value: {
       rank: 5,
-      element: 'fire',
+      element: "fire",
     },
   },
-  nextDealer: 'MXW',
+  nextDealer: "MXW",
   players: [
     {
-      name: 'JCL',
+      name: "JCL",
       score: 20,
       hand: [
         {
           rank: 11,
-          element: 'fire',
+          element: "fire",
         },
         {
           rank: 0,
-          element: 'magic',
-        }
+          element: "magic",
+        },
       ],
       bid: 2,
       tricksWon: 0,
       playedCard: {
         rank: 13,
-        element: 'earth',
+        element: "earth",
       },
     },
     {
-      name: 'MXW',
+      name: "MXW",
       score: 50,
       hand: [
         {
           rank: 6,
-          element: 'air',
+          element: "air",
         },
         {
           rank: 9,
-          element: 'earth',
-        }
+          element: "earth",
+        },
       ],
       bid: 3,
       tricksWon: 4,
       playedCard: {
         rank: 3,
-        element: 'water',
+        element: "water",
       },
     },
     {
-      name: 'JXL',
+      name: "JXL",
       score: 40,
       hand: [
         {
           rank: Infinity,
-          element: 'magic',
+          element: "magic",
         },
         {
           rank: 14,
-          element: 'water',
-        }
+          element: "water",
+        },
       ],
       bid: 3,
       tricksWon: 1,
       playedCard: {
         rank: 2,
-        element: 'air',
+        element: "air",
       },
     },
     {
-      name: 'KJL',
+      name: "KJL",
       score: 20,
       hand: [
         {
           rank: 0,
-          element: 'magic',
+          element: "magic",
         },
         {
           rank: Infinity,
-          element: 'magic',
+          element: "magic",
         },
         {
           rank: 2,
-          element: 'fire',
-        }
+          element: "fire",
+        },
       ],
       bid: 1,
       tricksWon: 0,

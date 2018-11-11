@@ -48,10 +48,14 @@
     2vh -2vh var(--blur) var(--spread) #08b,
     2vh 2vh var(--blur) var(--spread) white,
     -2vh 2vh var(--blur) var(--spread) black,
-    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread) darkorange,
-    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
-    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
-    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
+    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread)
+      darkorange,
+    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur)
+      var(--inspread) #08b,
+    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur)
+      var(--inspread) white,
+    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur)
+      var(--inspread) black;
 }
 
 .Card--magic.Card--trump {
@@ -65,10 +69,14 @@
     2vh -2vh var(--blur) var(--spread) #08b,
     2vh 2vh var(--blur) var(--spread) white,
     -2vh 2vh var(--blur) var(--spread) black,
-    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread) darkorange,
-    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur) var(--inspread) #08b,
-    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) white,
-    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur) var(--inspread) black;
+    inset var(--inoffset) var(--inoffset) var(--inblur) var(--inspread)
+      darkorange,
+    inset calc(var(--inoffset) * -1) var(--inoffset) var(--inblur)
+      var(--inspread) #08b,
+    inset calc(var(--inoffset) * -1) calc(var(--inoffset) * -1) var(--inblur)
+      var(--inspread) white,
+    inset var(--inoffset) calc(var(--inoffset) * -1) var(--inblur)
+      var(--inspread) black;
 }
 
 .Card--selected::after {
