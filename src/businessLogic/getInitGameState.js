@@ -37,7 +37,7 @@ export default (prngState0, playerNames) => {
 
   const trump = trumpCard.rank === 0
     ? {
-      type: 'noTrump',
+      type: 'zero',
       value: null,
     }
     : {
