@@ -65,12 +65,15 @@ export default class extends React.Component {
     };
 
     firebaseUtils.loginAnonymously().then((uid) => {
-      this.setState({
-        appState: {
-          type: 'HOME',
-          uid,
-          isPending: false,
-        },
+      firebaseUtils.getCurrentRoom(uid).then((currentRoom) => {
+        this.setState({
+          appState: {
+            type: 'HOME',
+            uid,
+            isPending: false,
+            currentRoom,
+          },
+        });
       });
     });
 
@@ -81,6 +84,7 @@ export default class extends React.Component {
       'indicatePendingSubmission',
       'onHomeJoin',
       'onHomeCreate',
+      'onHomeRejoin',
       'onBrowseSelect',
       'onBrowseConfirm',
       'onJoiningInitialEdit',
@@ -118,8 +122,10 @@ export default class extends React.Component {
         return (
           <HomeScreen
             isPending={this.state.appState.isPending}
+            currentRoom={this.state.appState.currentRoom}
             onJoinClicked={this.onHomeJoin}
             onCreateClicked={this.onHomeCreate}
+            onRejoinClicked={this.onHomeRejoin}
           />
         );
       case 'BROWSE_LOBBIES':
@@ -293,8 +299,20 @@ export default class extends React.Component {
         type: 'HOME',
         uid: prevState.appState.uid,
         isPending: false,
+        currentRoom: null,
       },
     }));
+    
+    firebaseUtils.getCurrentRoom(this.state.appState.uid).then((currentRoom) => {
+      if (currentRoom !== null && this.state.appState.type === 'HOME' && !this.state.appState.isPending) {
+        this.setState((prevState) => ({
+          appState: {
+            ...prevState.appState,
+            currentRoom,
+          },
+        }));
+      }
+    });
   }
 
   navigateToBrowseScreen() {
@@ -544,6 +562,27 @@ export default class extends React.Component {
         isPending: false,
       },
     }));
+  }
+
+  onHomeRejoin() {
+    this.indicatePendingSubmission();
+
+    const { hostName } = this.state.appState.currentRoom;
+    const { uid: hostUid } = this.state.appState.currentRoom.players.find(p => p.name === hostName);
+    const { uid: ownUid } = this.state.appState;
+
+    this.unsubscribeToRoomUpdates = firebaseUtils.onActionAppended(hostUid, (roomExists, roomState) => {
+      if (roomExists) {
+        this.updateRoomState(roomState);
+      } else {
+        this.setState({
+          appState: {
+            type: 'LOBBY_DESTROYED',
+            uid: ownUid,
+          },
+        });
+      }
+    });
   }
 
   onBrowseSelect(tentativePlayer) {

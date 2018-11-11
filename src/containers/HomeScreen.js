@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/HomeScreen.css';
 
-export default ({ isPending, onJoinClicked, onCreateClicked }) => [
+export default ({ isPending, currentRoom, onJoinClicked, onCreateClicked, onRejoinClicked }) => [
   <div className="HomeScreen__Join" onClick={onJoinClicked}>
     Join
   </div>,
@@ -10,6 +10,11 @@ export default ({ isPending, onJoinClicked, onCreateClicked }) => [
     Create
   </div>
 ].concat(
+  currentRoom === null
+    ? []
+    : [
+      <div className="HomeScreen__Rejoin" onClick={onRejoinClicked}>Rejoin {currentRoom.hostName}</div>
+]).concat(
   isPending
     ? [
       <div className="HomeScreen__PendingOverlay" />,

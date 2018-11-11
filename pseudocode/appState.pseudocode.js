@@ -22,8 +22,10 @@ const loginStandby = {};
 const home = {
   uid: 'string',
   isPending: 'boolean',
+  currentRoom: 'room' || null,
   create() {},
   browse() {},
+  rejoin() {},
 };
 
 const chooseLobbyToJoin = {

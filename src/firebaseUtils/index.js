@@ -1,5 +1,6 @@
 import loginAnonymously from './auth/loginAnonymously';
 
+import getCurrentRoom from './readers/getCurrentRoom';
 import getHostsOfJoinableRooms from './readers/getHostsOfJoinableRooms';
 import onActionAppended from './readers/onActionAppended';
 
@@ -15,7 +16,8 @@ import startRoom from './writers/startRoom';
 
 export default {
   loginAnonymously,
-  
+
+  getCurrentRoom,
   getHostsOfJoinableRooms,
   onActionAppended,
 

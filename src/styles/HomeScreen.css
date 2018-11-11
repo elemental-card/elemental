@@ -20,6 +20,19 @@
   background-color: green;
 }
 
+.HomeScreen__Rejoin {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 20vh;
+  text-align: center;
+  line-height: 20vh;
+  font-size: 10vh;
+  color: #EEE;
+  background: #222;
+  z-index: 1;
+}
+
 .HomeScreen__PendingOverlay {
   position: fixed;
   z-index: 1;
