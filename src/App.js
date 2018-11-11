@@ -365,9 +365,11 @@ export default class extends React.Component {
                 .find(p => p.name === player.name);
               const playedCard = player.hand.length === 1
                 ? player.hand[0]
-                : player.hand.find((card) => (
-                  !newPlayer.hand.includes(card)
-                ));
+                : newPlayer.hand.reduce((hand, card) => {
+                  const i = hand.findIndex(c => c.rank === card.rank && c.element === card.element);
+                  return hand.slice(0, i).concat(hand.slice(i + 1));
+                }, player.hand)[0];
+
               return {
                 ...player,
                 playedCard,
