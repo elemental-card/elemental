@@ -17,6 +17,7 @@ import WaitForOpponentToChooseCardScreen from "./containers/WaitForOpponentToCho
 import TrickResultScreen from "./containers/TrickResultScreen";
 import HandResultScreen from "./containers/HandResultScreen";
 import GameResultScreen from "./containers/GameResultScreen";
+import LobbyDestroyedScreen from "./containers/LobbyDestroyedScreen";
 
 import firebaseUtils from "./firebaseUtils";
 
@@ -283,7 +284,7 @@ export default class extends React.Component {
           />
         );
       case "LOBBY_DESTROYED":
-        return <div>TODO: lobby destroyed</div>;
+        return <LobbyDestroyedScreen onHome={this.navigateToHomeScreen} />;
       default:
         throw new TypeError("Illegal state type: " + this.state.appState.type);
     }
