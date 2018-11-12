@@ -55,6 +55,9 @@ const getDisplayCardOfTrump = trump => {
 const getHostUidOfRoomState = roomState =>
   roomState.players.find(p => p.name === roomState.hostName).uid;
 
+const areTentativeInitialsValid = tentativeInitials =>
+  /^\w{0,3}$/.test(tentativeInitials);
+
 export default class extends React.Component {
   constructor() {
     super();
@@ -619,12 +622,14 @@ export default class extends React.Component {
   }
 
   onJoiningInitialEdit(tentativeInitials) {
-    this.setState(prevState => ({
-      appState: {
-        ...prevState.appState,
-        tentativeInitials,
-      },
-    }));
+    if (areTentativeInitialsValid(tentativeInitials)) {
+      this.setState(prevState => ({
+        appState: {
+          ...prevState.appState,
+          tentativeInitials,
+        },
+      }));
+    }
   }
 
   onJoiningInitialConfirm() {
@@ -652,12 +657,14 @@ export default class extends React.Component {
   }
 
   onCreatingInitialEdit(tentativeInitials) {
-    this.setState(prevState => ({
-      appState: {
-        ...prevState.appState,
-        tentativeInitials,
-      },
-    }));
+    if (areTentativeInitialsValid(tentativeInitials)) {
+      this.setState(prevState => ({
+        appState: {
+          ...prevState.appState,
+          tentativeInitials,
+        },
+      }));
+    }
   }
 
   onCreatingInitialConfirm() {
