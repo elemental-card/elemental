@@ -6,6 +6,10 @@ const db = firebase.firestore();
 export default (hostUid, callback) => {
   const roomRef = db.collection("rooms").doc(hostUid);
   return roomRef.onSnapshot(roomDoc => {
-    callback(roomDoc.exists, getRoomStateFromRoomDoc(roomDoc));
+    if (roomDoc.exists) {
+      callback(true, getRoomStateFromRoomDoc(roomDoc));
+    } else {
+      callback(false, null);
+    }
   });
 };

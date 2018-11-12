@@ -584,6 +584,7 @@ export default class extends React.Component {
         if (roomExists) {
           this.updateRoomState(roomState);
         } else {
+          this.unsubscribeToRoomUpdates();
           this.setState({
             appState: {
               type: "LOBBY_DESTROYED",
@@ -636,6 +637,7 @@ export default class extends React.Component {
           if (roomExists) {
             this.updateRoomState(roomState);
           } else {
+            this.unsubscribeToRoomUpdates();
             this.setState({
               appState: {
                 type: "LOBBY_DESTROYED",
@@ -668,6 +670,7 @@ export default class extends React.Component {
           if (roomExists) {
             this.updateRoomState(roomState);
           } else {
+            this.unsubscribeToRoomUpdates();
             this.setState({
               appState: {
                 type: "LOBBY_DESTROYED",
