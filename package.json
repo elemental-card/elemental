@@ -11,13 +11,13 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages --repo \"https://github.com/elemental-card/elemental-card.github.io.git\" -b master -d build",
+    "deploy": "gh-pages --repo \"https://github.com/elementalcard/elementalcard.github.io.git\" -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://elemental-card.github.io",
+  "homepage": "https://elementalcard.github.io",
   "devDependencies": {
     "gh-pages": "^1.2.0",
     "prettier": "^1.15.2"

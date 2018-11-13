@@ -3,7 +3,7 @@
 A simple trick-taking game built with React and Firebase.
 
 This repository contains the source code for our website
-([elemental-card.github.io](https://elemental-card.github.io)).
+([elementalcard.github.io](https://elementalcard.github.io)).
 
 ## Rules
 
