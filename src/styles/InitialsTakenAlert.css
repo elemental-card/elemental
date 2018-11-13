@@ -1,0 +1,28 @@
+.InitialsTakenAlert {
+  color: #ffffff;
+  position: absolute;
+  top: 55vh;
+  left: 2vh;
+  font-size: 8vh;
+  background: maroon;
+  padding: 3vh;
+  margin-bottom: 2vh;
+  border-radius: 3vh;
+  width: 75vw;
+  white-space: normal;
+}
+
+.InitialsTakenAlert__CloseButton {
+  position: relative;
+  display: inline-block;
+  float: right;
+  color: maroon;
+  background-color: white;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 10vh;
+  text-align: center;
+  line-height: 10vh;
+  font-size: 8vh;
+  margin: 0 2vh 0 2vh;
+}

@@ -94,6 +94,7 @@ export default class extends React.Component {
       "onBrowseConfirm",
       "onJoiningInitialEdit",
       "onJoiningInitialConfirm",
+      "onJoiningInitialAcknowledge",
       "onCreatingInitialEdit",
       "onCreatingInitialConfirm",
       "onLobbyStart",
@@ -147,9 +148,11 @@ export default class extends React.Component {
         return (
           <InitialChoosingScreen
             tentativeInitials={this.state.appState.tentativeInitials}
+            areInitialsTaken={this.state.appState.areInitialsTaken}
             isPending={this.state.appState.isPending}
             onEditTentativeInitials={this.onJoiningInitialEdit}
             onConfirmTentativeInitials={this.onJoiningInitialConfirm}
+            onAcknowledgeThatInitialsAreTaken={this.onJoiningInitialAcknowledge}
             onBack={this.navigateToBrowseScreen}
           />
         );
@@ -620,6 +623,7 @@ export default class extends React.Component {
         uid: prevState.appState.uid,
         hostUid: prevState.appState.tentativePlayer.uid,
         tentativeInitials: "",
+        areInitialsTaken: false,
         isPending: false,
       },
     }));
@@ -661,10 +665,21 @@ export default class extends React.Component {
             },
           );
         } else {
-          alert("Initials in use");
           this.clearPendingSubmission();
+          this.setState(prevState => ({
+            appState: {
+              ...prevState.appState,
+              areInitialsTaken: true,
+            },
+          }));
         }
       });
+  }
+
+  onJoiningInitialAcknowledge() {
+    this.setState(prevState => ({
+      appState: { ...prevState.appState, areInitialsTaken: false },
+    }));
   }
 
   onCreatingInitialEdit(tentativeInitials) {

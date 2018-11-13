@@ -4,15 +4,18 @@ import BackSection from "../components/BackSection";
 import Container from "../components/Container";
 import Header from "../components/Header";
 import TextInput from "../components/TextInput";
+import InitialsTakenAlert from "../components/InitialsTakenAlert";
 
 const areInitialsValid = initials => /^\w{1,3}$/.test(initials);
 
 export default ({
   tentativeInitials,
+  areInitialsTaken,
   isPending,
 
   onEditTentativeInitials,
   onConfirmTentativeInitials,
+  onAcknowledgeThatInitialsAreTaken,
   onBack,
 }) => [
   <ConfirmSection
@@ -30,5 +33,8 @@ export default ({
   <Container left lightGrey>
     <Header>Type your initials (3 max):</Header>
     <TextInput value={tentativeInitials} onChange={onEditTentativeInitials} />
+    {areInitialsTaken && (
+      <InitialsTakenAlert onClose={onAcknowledgeThatInitialsAreTaken} />
+    )}
   </Container>,
 ];
