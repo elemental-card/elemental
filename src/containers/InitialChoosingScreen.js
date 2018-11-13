@@ -29,7 +29,7 @@ export default ({
     onClick={onConfirmTentativeInitials}
     label="Confirm"
   />,
-  <BackSection status="enabled" onClick={onBack} label="Home" />,
+  <BackSection status="enabled" onClick={onBack} label="Back" />,
   <Container left lightGrey>
     <Header>Type your initials (3 max):</Header>
     <TextInput value={tentativeInitials} onChange={onEditTentativeInitials} />
