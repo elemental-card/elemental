@@ -86,6 +86,7 @@ export default class extends React.Component {
       "navigateToBrowseScreen",
       "updateRoomState",
       "indicatePendingSubmission",
+      "clearPendingSubmission",
       "onHomeJoin",
       "onHomeCreate",
       "onHomeRejoin",
@@ -550,10 +551,13 @@ export default class extends React.Component {
 
   indicatePendingSubmission() {
     this.setState(prevState => ({
-      appState: {
-        ...prevState.appState,
-        isPending: true,
-      },
+      appState: { ...prevState.appState, isPending: true },
+    }));
+  }
+
+  clearPendingSubmission() {
+    this.setState(prevState => ({
+      appState: { ...prevState.appState, isPending: false },
     }));
   }
 
@@ -636,24 +640,31 @@ export default class extends React.Component {
     this.indicatePendingSubmission();
 
     const { uid, hostUid, tentativeInitials } = this.state.appState;
-    firebaseUtils.joinRoom(hostUid, uid, tentativeInitials).then(() => {
-      this.unsubscribeToRoomUpdates = firebaseUtils.onActionAppended(
-        hostUid,
-        (roomExists, roomState) => {
-          if (roomExists) {
-            this.updateRoomState(roomState);
-          } else {
-            this.unsubscribeToRoomUpdates();
-            this.setState({
-              appState: {
-                type: "LOBBY_DESTROYED",
-                uid,
-              },
-            });
-          }
-        },
-      );
-    });
+    firebaseUtils
+      .joinRoom(hostUid, uid, tentativeInitials)
+      .then(didJoinSucceed => {
+        if (didJoinSucceed) {
+          this.unsubscribeToRoomUpdates = firebaseUtils.onActionAppended(
+            hostUid,
+            (roomExists, roomState) => {
+              if (roomExists) {
+                this.updateRoomState(roomState);
+              } else {
+                this.unsubscribeToRoomUpdates();
+                this.setState({
+                  appState: {
+                    type: "LOBBY_DESTROYED",
+                    uid,
+                  },
+                });
+              }
+            },
+          );
+        } else {
+          alert("Initials in use");
+          this.clearPendingSubmission();
+        }
+      });
   }
 
   onCreatingInitialEdit(tentativeInitials) {
