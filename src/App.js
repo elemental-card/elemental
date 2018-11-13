@@ -724,8 +724,7 @@ export default class extends React.Component {
 
     const { uid } = this.state.appState;
     this.unsubscribeToRoomUpdates();
-    firebaseUtils.deleteRoom(uid);
-    this.navigateToHomeScreen();
+    firebaseUtils.deleteRoom(uid).then(this.navigateToHomeScreen);
   }
 
   onLobbyLeave() {
@@ -734,8 +733,7 @@ export default class extends React.Component {
     const { uid, roomState } = this.state.appState;
     const hostUid = getHostUidOfRoomState(roomState);
     this.unsubscribeToRoomUpdates();
-    firebaseUtils.leaveRoom(hostUid, uid);
-    this.navigateToHomeScreen();
+    firebaseUtils.leaveRoom(hostUid, uid).then(this.navigateToHomeScreen);
   }
 
   onTrumpSelect(tentativeElement) {
