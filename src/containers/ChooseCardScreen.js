@@ -26,7 +26,9 @@ export default ({
   <Container topLeft lightGrey>
     <CardTable
       players={players}
-      trumpElement={trumpCard.element}
+      trumpElement={
+        trumpCard === null || trumpCard.rank === 0 ? null : trumpCard.element
+      }
       tentativeCard={
         tentativeCardIndex === -1 ? null : hand[tentativeCardIndex]
       }
@@ -36,7 +38,9 @@ export default ({
     <Hand
       cards={hand}
       selectedCardIndex={tentativeCardIndex}
-      trumpElement={trumpCard.element}
+      trumpElement={
+        trumpCard === null || trumpCard.rank === 0 ? null : trumpCard.element
+      }
       playedCards={players
         .filter(p => p.playedCard !== null)
         .map(p => p.playedCard)}

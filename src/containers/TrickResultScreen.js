@@ -15,12 +15,19 @@ export default ({
   <ConfirmSection status="enabled" onClick={onContinue} label="Continue" />,
   <TrumpSection card={trumpCard} />,
   <Container topLeft lightGrey>
-    <CardTable players={players} trumpElement={trumpCard.element} />
+    <CardTable
+      players={players}
+      trumpElement={
+        trumpCard === null || trumpCard.rank === 0 ? null : trumpCard.element
+      }
+    />
   </Container>,
   <Container bottomLeft darkGrey>
     <Hand
       cards={hand}
-      trumpElement={trumpCard.element}
+      trumpElement={
+        trumpCard === null || trumpCard.rank === 0 ? null : trumpCard.element
+      }
       playedCards={players
         .filter(p => p.playedCard !== null)
         .map(p => p.playedCard)}

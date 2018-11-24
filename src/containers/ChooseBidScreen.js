@@ -45,7 +45,9 @@ export default ({
     <Container bottomCenter darkGrey>
       <Hand
         cards={hand}
-        trumpElement={trumpCard === null ? null : trumpCard.element}
+        trumpElement={
+          trumpCard === null || trumpCard.rank === 0 ? null : trumpCard.element
+        }
       />
     </Container>,
   ];
