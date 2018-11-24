@@ -1,4 +1,5 @@
 import firebase from "../firebase";
+import version from "../../version";
 
 const db = firebase.firestore();
 
@@ -8,6 +9,7 @@ export default async (hostUid, hostName) => {
     await roomRef.set({
       hostName,
       actions: [],
+      version,
     });
   } catch (unused) {
     await roomRef.delete();

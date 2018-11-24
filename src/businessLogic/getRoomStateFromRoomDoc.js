@@ -9,7 +9,7 @@ import getInitGameState from "./getInitGameState";
 
 export default roomDoc => {
   const hostUid = roomDoc.id;
-  const { actions, hostName } = roomDoc.data();
+  const { actions, hostName, version } = roomDoc.data();
   return actions.reduce(
     (roomState, action) => {
       if (
@@ -137,6 +137,7 @@ export default roomDoc => {
           name: hostName,
         },
       ],
+      version,
     },
   );
 };
