@@ -3,9 +3,9 @@ import Container from "../components/Container";
 import Header from "../components/Header";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-export default () => (
+export default ({ version }) => (
   <Container fullscreen lightGrey>
-    <Header>Connecting to server...</Header>
+    <Header>Elemental v{version} - connecting to server...</Header>
     <LoadingSpinner />
   </Container>
 );

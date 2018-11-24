@@ -23,6 +23,8 @@ import firebaseUtils from "./firebaseUtils";
 
 import getActivePlayerName from "./businessLogic/getActivePlayerName";
 
+import version from "./version";
+
 const getOwnHandFromAppState = appState => {
   const ownName = appState.roomState.players.find(p => p.uid === appState.uid)
     .name;
@@ -123,7 +125,7 @@ export default class extends React.Component {
   render() {
     switch (this.state.appState.type) {
       case "LOGIN_STANDBY":
-        return <ConnectToServerScreen />;
+        return <ConnectToServerScreen version={version} />;
       case "HOME":
         return (
           <HomeScreen
