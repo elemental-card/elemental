@@ -4,10 +4,14 @@ import { getWinnerIndex } from "../businessLogic/cardUtils";
 import "../styles/CardTable.css";
 
 export default ({ players, trumpElement, tentativeCard = null }) => {
-  const winnerIndex = getWinnerIndex(
-    players.filter(p => p.playedCard !== null).map(p => p.playedCard),
-    trumpElement,
-  );
+  const winnerIndex =
+    tentativeCard === null &&
+    players.every(player => player.playedCard === null)
+      ? -1
+      : getWinnerIndex(
+          players.filter(p => p.playedCard !== null).map(p => p.playedCard),
+          trumpElement,
+        );
 
   return (
     <div className="CardTable">
