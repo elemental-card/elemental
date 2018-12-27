@@ -85,7 +85,8 @@ export default (currState, choice) => {
       setPlayersHandUsing(deck, cardsPerPlayer),
       removePlayersBidsTricksWonAndPlayedCards,
     );
-    const doesDealerNeedToChooseTrump = trumpCard.rank === Infinity;
+    const doesDealerNeedToChooseTrump =
+      trumpCard !== null && trumpCard.rank === Infinity;
     if (doesDealerNeedToChooseTrump) {
       return pipeHelper(currState, setStateTypeToChoosingTrump);
     }
