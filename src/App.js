@@ -542,6 +542,14 @@ export default class extends React.Component {
                     },
                   };
                 }
+              case "FINAL":
+                return {
+                  appState: {
+                    type: "GAME_RESULT",
+                    uid: ownUid,
+                    viewedRoomState: newRoomState,
+                  },
+                };
               default:
                 throw new TypeError(
                   "Illegal gameState type: " + newRoomState.gameState.type,
