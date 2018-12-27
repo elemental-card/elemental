@@ -57,6 +57,7 @@ export default roomDoc => {
             action.prngState,
             roomState.players.map(p => p.name),
           ),
+          version: roomState.version,
         };
       }
 
