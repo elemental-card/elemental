@@ -18,12 +18,15 @@ import TrickResultScreen from "./containers/TrickResultScreen";
 import HandResultScreen from "./containers/HandResultScreen";
 import GameResultScreen from "./containers/GameResultScreen";
 import LobbyDestroyedScreen from "./containers/LobbyDestroyedScreen";
+import NoninteractiveScoreTable from "./containers/NoninteractiveScoreTable";
 
 import firebaseUtils from "./firebaseUtils";
 
 import getActivePlayerName from "./businessLogic/getActivePlayerName";
 
 import version from "./version";
+
+const SENSITIVITY_FACTOR = 1.5;
 
 const getOwnHandFromAppState = appState => {
   const ownName = appState.roomState.players.find(p => p.uid === appState.uid)
@@ -60,11 +63,15 @@ const getHostUidOfRoomState = roomState =>
 const areTentativeInitialsValid = tentativeInitials =>
   /^\w{0,3}$/.test(tentativeInitials);
 
+const clamp = (min, max, value) => Math.min(max, Math.max(min, value));
+
 export default class extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      screenSwitcherY: 1,
+      previousTouchY: null,
       appState: {
         type: "LOGIN_STANDBY",
       },
@@ -113,6 +120,8 @@ export default class extends React.Component {
       "onTrickContinue",
       "onHandContinue",
       "onGameContinue",
+      "onContainerTouchMove",
+      "onContainerTouchEnd",
     ].forEach(methodName => {
       this[methodName] = this[methodName].bind(this);
     });
@@ -123,6 +132,25 @@ export default class extends React.Component {
   }
 
   render() {
+    if (this.doPlayersHaveScore()) {
+      return (
+        <div
+          onTouchMove={this.onContainerTouchMove}
+          onTouchEnd={this.onContainerTouchEnd}
+        >
+          {this.renderContent()}
+          <NoninteractiveScoreTable
+            top={this.state.screenSwitcherY * 100 + "vh"}
+            players={this.state.appState.roomState.gameState.players}
+          />
+        </div>
+      );
+    } else {
+      return this.renderContent();
+    }
+  }
+
+  renderContent() {
     switch (this.state.appState.type) {
       case "LOGIN_STANDBY":
         return <ConnectToServerScreen version={version} />;
@@ -990,5 +1018,52 @@ export default class extends React.Component {
 
   onGameContinue() {
     this.navigateToHomeScreen();
+  }
+
+  onContainerTouchMove(e) {
+    if (this.doPlayersHaveScore()) {
+      const touchY = e.changedTouches[0].clientY;
+      const normalizedTouchY = touchY / window.innerHeight;
+      const deltaY =
+        "number" === typeof this.state.previousTouchY
+          ? normalizedTouchY - this.state.previousTouchY
+          : 0;
+      this.setState(prevState => ({
+        previousTouchY: normalizedTouchY,
+        screenSwitcherY: clamp(
+          0,
+          1,
+          "number" === typeof prevState.screenSwitcherY
+            ? prevState.screenSwitcherY + deltaY * SENSITIVITY_FACTOR
+            : 1,
+        ),
+      }));
+    }
+  }
+
+  doPlayersHaveScore() {
+    return [
+      "CHOOSE_TRUMP_ELEMENT",
+      "WAIT_FOR_TRUMP",
+      "TRUMP_RESULT",
+      "CHOOSE_BID",
+      "WAIT_FOR_BID",
+      "BID_RESULT",
+      "CHOOSE_CARD",
+      "WAIT_FOR_CARD",
+      "TRICK_RESULT",
+    ].includes(this.state.appState.type);
+  }
+
+  onContainerTouchEnd(e) {
+    this.setState(prevState => ({
+      previousTouchY: null,
+      screenSwitcherY:
+        prevState.screenSwitcherY > 0.5
+          ? 1
+          : prevState.screenSwitcherY < 0.5
+          ? 0
+          : prevState.screenSwitcherY,
+    }));
   }
 }

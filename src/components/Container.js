@@ -10,6 +10,14 @@ const getClassName = options =>
 
 export default ({
   children,
+  top,
 
   ...options
-}) => <div className={getClassName(options)}>{children}</div>;
+}) => (
+  <div
+    style={top !== undefined ? { top } : {}}
+    className={getClassName(options)}
+  >
+    {children}
+  </div>
+);
