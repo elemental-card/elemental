@@ -10,4 +10,4 @@
 //
 // For more info, see https://semver.org/
 
-export default "1.0.5";
+export default "1.0.6";

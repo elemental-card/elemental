@@ -27,6 +27,10 @@ import getActivePlayerName from "./businessLogic/getActivePlayerName";
 import version from "./version";
 
 const SENSITIVITY_FACTOR = 1.5;
+// 30 degrees
+const MINIMUM_SWIPE_ANGLE = Math.PI / 6;
+// 90 degrees
+const UPWARDS = Math.PI / 2;
 
 const getOwnHandFromAppState = appState => {
   const ownName = appState.roomState.players.find(p => p.uid === appState.uid)
@@ -1022,19 +1026,31 @@ export default class extends React.Component {
 
   onContainerTouchMove(e) {
     if (this.doPlayersHaveScore()) {
-      const touchY = e.changedTouches[0].clientY;
-      const normalizedTouchY = touchY / window.innerHeight;
+      const [rawTouch] = e.changedTouches;
+      const normalizedTouchY = rawTouch.clientY / window.innerHeight;
       const deltaY =
         "number" === typeof this.state.previousTouchY
           ? normalizedTouchY - this.state.previousTouchY
           : 0;
+      const swipeAngle = this.state.previousRawTouch
+        ? Math.atan(
+            Math.abs(
+              (this.state.previousRawTouch.clientY - rawTouch.clientY) /
+                (this.state.previousRawTouch.clientX - rawTouch.clientX),
+            ),
+          )
+        : UPWARDS;
       this.setState(prevState => ({
+        previousRawTouch: rawTouch,
         previousTouchY: normalizedTouchY,
         screenSwitcherY: clamp(
           0,
           1,
           "number" === typeof prevState.screenSwitcherY
-            ? prevState.screenSwitcherY + deltaY * SENSITIVITY_FACTOR
+            ? prevState.screenSwitcherY +
+                (swipeAngle > MINIMUM_SWIPE_ANGLE
+                  ? deltaY * SENSITIVITY_FACTOR
+                  : 0)
             : 1,
         ),
       }));
