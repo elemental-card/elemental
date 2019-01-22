@@ -7,7 +7,7 @@ import PlacementIndicator from "../components/PlacementIndicator";
 
 export default ({ top, players }) => [
   <Container top={top} fullscreen lightGrey>
-    <Header>Scores:</Header>
+    <Header>Current round: {roundNumberFromPlayers(players)}</Header>
     <List>
       {players
         .slice()
@@ -27,3 +27,14 @@ export default ({ top, players }) => [
     </List>
   </Container>,
 ];
+
+const roundNumberFromPlayers = players => {
+  const totalTricksWon = players
+    .map(p => p.tricksWon || 0)
+    .reduce((a, b) => a + b);
+  if (totalTricksWon === 60 / players) {
+    return totalTricksWon;
+  } else {
+    return totalTricksWon + Math.max(...players.map(p => p.hand.length));
+  }
+};
