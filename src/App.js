@@ -399,7 +399,8 @@ export default class extends React.Component {
       oldAppState.type === "WAIT_FOR_CARD" &&
       (newRoomState.gameState.players[0].playedCard === null ||
         newRoomState.gameState.type === "CHOOSING_TRUMP" ||
-        newRoomState.gameState.type === "BIDDING")
+        newRoomState.gameState.type === "BIDDING" ||
+        newRoomState.gameState.type === "FINAL")
     ) {
       this.setState(prevState => {
         const { name: ownName } = oldRoomState.players.find(
@@ -447,7 +448,8 @@ export default class extends React.Component {
     } else if (
       oldAppState.type === "CHOOSE_CARD" &&
       (newRoomState.gameState.type === "CHOOSING_TRUMP" ||
-        newRoomState.gameState.type === "BIDDING")
+        newRoomState.gameState.type === "BIDDING" ||
+        newRoomState.gameState.type === "FINAL")
     ) {
       this.setState(prevState => {
         const scoreBreakdowns = newRoomState.gameState.players.map(player => {
